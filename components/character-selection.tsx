@@ -7,6 +7,7 @@ import { ArrowLeft, ArrowRight, Sparkles } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useLanguage } from "@/lib/language-context"
+import { SimpleAudioControl } from "@/components/ui/simple-audio-control"
 
 const getCharacters = (t: (key: string) => string) => [
   {
@@ -219,12 +220,26 @@ export function CharacterSelection() {
             {/* Character Info */}
             <div className="p-4 md:p-4">
               <h3 className="text-xl md:text-2xl font-black text-space-deep dark:text-white mb-2">{character.name}</h3>
-              <p className="text-sm md:text-base text-space-light dark:text-gray-200 mb-4 leading-relaxed">{character.description}</p>
+              <div className="flex items-start gap-2 mb-4">
+                <p className="text-sm md:text-base text-space-light dark:text-gray-200 leading-relaxed flex-1">{character.description}</p>
+                <SimpleAudioControl 
+                  text={character.description}
+                  size="sm"
+                  className="flex-shrink-0 mt-1"
+                />
+              </div>
 
               {/* Challenge */}
               <div className="bg-accent-sun/10 dark:bg-accent-sun/15 rounded-lg p-2 md:p-3 mb-4">
                 <p className="text-xs md:text-sm font-bold text-space-deep dark:text-white mb-1">{t("characters.challenge")}:</p>
-                <p className="text-xs md:text-sm text-space-light dark:text-gray-200">{character.challenge}</p>
+                <div className="flex items-start gap-2">
+                  <p className="text-xs md:text-sm text-space-light dark:text-gray-200 flex-1">{character.challenge}</p>
+                  <SimpleAudioControl 
+                    text={character.challenge}
+                    size="sm"
+                    className="flex-shrink-0 mt-0.5"
+                  />
+                </div>
               </div>
 
               {/* Fun Facts */}
@@ -233,7 +248,14 @@ export function CharacterSelection() {
                 {character.facts.map((fact, index) => (
                   <div key={index} className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                    <p className="text-xs md:text-sm text-space-light dark:text-gray-300">{fact}</p>
+                    <div className="flex items-start gap-2 flex-1">
+                      <p className="text-xs md:text-sm text-space-light dark:text-gray-300 flex-1">{fact}</p>
+                      <SimpleAudioControl 
+                        text={fact}
+                        size="sm"
+                        className="flex-shrink-0 mt-0.5"
+                      />
+                    </div>
                   </div>
                 ))}
               </div>
