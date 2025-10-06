@@ -11,103 +11,103 @@ import { interpolate } from "@/lib/i18n-utils"
 
 const facts = [
   {
-    category: "Solar Flares",
-    fact: "The biggest solar flare ever recorded happened in 2003 and was so powerful it overloaded the sensors measuring it!",
+    categoryKey: "facts.categories.solarFlares",
+    contentKey: "facts.content.solarFlares1",
     difficulty: "easy",
   },
   {
-    category: "The Sun",
-    fact: "The Sun is so big that you could fit more than 1 million Earths inside it!",
+    categoryKey: "facts.categories.theSun",
+    contentKey: "facts.content.theSun1",
     difficulty: "easy",
   },
   {
-    category: "Auroras",
-    fact: "Auroras also happen on other planets! Jupiter and Saturn have auroras that are even bigger and brighter than Earth's.",
+    categoryKey: "facts.categories.auroras",
+    contentKey: "facts.content.auroras1",
     difficulty: "medium",
   },
   {
-    category: "Speed",
-    fact: "Solar wind travels at about 1 million miles per hour - that's fast enough to go from Earth to the Moon in just 15 minutes!",
+    categoryKey: "facts.categories.speed",
+    contentKey: "facts.content.speed1",
     difficulty: "medium",
   },
   {
-    category: "History",
-    fact: "In 1859, a massive solar storm called the Carrington Event made telegraph wires spark and catch fire. If it happened today, it could damage satellites and power grids worldwide!",
+    categoryKey: "facts.categories.history",
+    contentKey: "facts.content.history1",
     difficulty: "hard",
   },
   {
-    category: "Protection",
-    fact: "Earth's magnetic field protects us from most solar radiation. Without it, solar wind would strip away our atmosphere like it did on Mars!",
+    categoryKey: "facts.categories.protection",
+    contentKey: "facts.content.protection1",
     difficulty: "medium",
   },
   {
-    category: "CMEs",
-    fact: "A Coronal Mass Ejection can contain up to 10 billion tons of particles - that's heavier than 10,000 aircraft carriers!",
+    categoryKey: "facts.categories.cmes",
+    contentKey: "facts.content.cmes1",
     difficulty: "hard",
   },
   {
-    category: "Auroras",
-    fact: "The colors of auroras depend on which gas particles are hit: oxygen creates green and red, while nitrogen creates blue and purple.",
+    categoryKey: "facts.categories.auroras",
+    contentKey: "facts.content.auroras2",
     difficulty: "easy",
   },
   {
-    category: "Technology",
-    fact: "GPS satellites can become less accurate during solar storms because the radiation affects radio signals traveling through the atmosphere.",
+    categoryKey: "facts.categories.technology",
+    contentKey: "facts.content.technology1",
     difficulty: "medium",
   },
   {
-    category: "The Sun",
-    fact: "The Sun's surface temperature is about 10,000°F, but its outer atmosphere (corona) is mysteriously much hotter at over 2 million°F!",
+    categoryKey: "facts.categories.theSun",
+    contentKey: "facts.content.theSun2",
     difficulty: "hard",
   },
   {
-    category: "History",
-    fact: "In 1989, a geomagnetic storm caused a 9-hour blackout in Quebec, Canada, affecting 6 million people. The same storm made auroras visible as far south as Texas!",
+    categoryKey: "facts.categories.history",
+    contentKey: "facts.content.history2",
     difficulty: "medium",
   },
   {
-    category: "Space Travel",
-    fact: "Astronauts on the International Space Station can receive as much radiation in one day during a solar storm as you'd get from 100 chest X-rays!",
+    categoryKey: "facts.categories.spaceTravel",
+    contentKey: "facts.content.spaceTravel1",
     difficulty: "hard",
   },
   {
-    category: "Solar Cycle",
-    fact: "The Sun goes through an 11-year cycle of activity. During solar maximum, there are many more solar flares and CMEs than during solar minimum.",
+    categoryKey: "facts.categories.solarCycle",
+    contentKey: "facts.content.solarCycle1",
     difficulty: "medium",
   },
   {
-    category: "Auroras",
-    fact: "The best places to see auroras are near the Arctic and Antarctic circles, in places like Alaska, Canada, Iceland, Norway, and Antarctica.",
+    categoryKey: "facts.categories.auroras",
+    contentKey: "facts.content.auroras3",
     difficulty: "easy",
   },
   {
-    category: "Speed",
-    fact: "Light from a solar flare reaches Earth in just 8 minutes, but the particles from a CME take 1-3 days to arrive.",
+    categoryKey: "facts.categories.speed",
+    contentKey: "facts.content.speed2",
     difficulty: "medium",
   },
   {
-    category: "Animals",
-    fact: "Some scientists think that whales, sea turtles, and birds use Earth's magnetic field to navigate. Solar storms might confuse them!",
+    categoryKey: "facts.categories.animals",
+    contentKey: "facts.content.animals1",
     difficulty: "hard",
   },
   {
-    category: "Technology",
-    fact: "Airlines sometimes have to reroute flights during solar storms to avoid radiation exposure and communication problems at high altitudes.",
+    categoryKey: "facts.categories.technology",
+    contentKey: "facts.content.technology2",
     difficulty: "medium",
   },
   {
-    category: "The Sun",
-    fact: "The Sun converts 4 million tons of matter into energy every second through nuclear fusion!",
+    categoryKey: "facts.categories.theSun",
+    contentKey: "facts.content.theSun3",
     difficulty: "hard",
   },
   {
-    category: "Auroras",
-    fact: "Auroras make sounds! Some people report hearing crackling or whooshing noises during very strong aurora displays.",
+    categoryKey: "facts.categories.auroras",
+    contentKey: "facts.content.auroras4",
     difficulty: "hard",
   },
   {
-    category: "Prediction",
-    fact: "Scientists use special satellites positioned between Earth and the Sun to give us about 15-60 minutes warning before a solar storm hits!",
+    categoryKey: "facts.categories.prediction",
+    contentKey: "facts.content.prediction1",
     difficulty: "medium",
   },
 ]
@@ -179,7 +179,7 @@ export function SpaceWeatherFacts() {
           {/* Category and Difficulty */}
           <div className="flex items-center justify-between mb-6">
             <Badge className="bg-primary/10 text-primary border-2 border-primary/20 text-sm font-bold px-4 py-1">
-              {facts[currentIndex].category}
+              {t(facts[currentIndex].categoryKey)}
             </Badge>
             <Badge className={`${getDifficultyColor(facts[currentIndex].difficulty)} text-sm font-bold px-4 py-1`}>
               {facts[currentIndex].difficulty.charAt(0).toUpperCase() + facts[currentIndex].difficulty.slice(1)}
@@ -195,7 +195,7 @@ export function SpaceWeatherFacts() {
 
           {/* Fact Text */}
           <p className="text-2xl md:text-3xl text-space-deep dark:text-white leading-relaxed text-center font-medium mb-8">
-            {facts[currentIndex].fact}
+            {t(facts[currentIndex].contentKey)}
           </p>
 
           {/* Progress */}

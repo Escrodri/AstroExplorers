@@ -137,3 +137,141 @@ export function setCachedImages(cacheKey: string, images: string[]): void {
   }
 }
 
+/**
+ * Interfaz para contenido educativo de la NASA
+ */
+export interface NasaEducationalContent {
+  title: string
+  description: string
+  image: string
+  date: string
+  explanation?: string
+  keywords?: string[]
+}
+
+/**
+ * Obtiene contenido educativo de la NASA con imágenes y texto relacionado
+ * 
+ * @param query - Término de búsqueda educativo
+ * @param retries - Número de reintentos en caso de fallo
+ * @returns Contenido educativo o null si falla
+ */
+export async function fetchNasaEducationalContent(
+  query: string,
+  retries = DEFAULT_RETRIES
+): Promise<NasaEducationalContent | null> {
+  try {
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS)
+
+    const response = await fetch(
+      `${NASA_API_URL}/search?q=${encodeURIComponent(query)}&media_type=image`,
+      { 
+        signal: controller.signal,
+        next: { revalidate: 3600 } // Cache por 1 hora
+      }
+    )
+
+    clearTimeout(timeoutId)
+
+    if (!response.ok) {
+      throw new Error(`NASA API error: ${response.status} ${response.statusText}`)
+    }
+
+    const data: NasaResponse = await response.json()
+    
+    if (!data?.collection?.items || !Array.isArray(data.collection.items)) {
+      throw new Error('Invalid NASA API response structure')
+    }
+
+    const items = data.collection.items
+    if (items.length === 0) {
+      console.warn(`No educational content found for query: "${query}"`)
+      return null
+    }
+
+    // Obtener el primer resultado con más información
+    const item = items[0]
+    const imageUrl = item?.links?.[0]?.href
+
+    if (!imageUrl) {
+      throw new Error('No image URL found in response')
+    }
+
+    // Extraer información del item
+    const title = item.data?.[0]?.title || `Contenido sobre ${query}`
+    const description = item.data?.[0]?.description || `Información educativa sobre ${query}`
+    const date = item.data?.[0]?.date_created || new Date().toISOString()
+    const keywords = item.data?.[0]?.keywords || []
+
+    return {
+      title,
+      description: description.substring(0, 500) + (description.length > 500 ? '...' : ''),
+      image: imageUrl,
+      date,
+      keywords
+    }
+
+  } catch (error) {
+    if (retries > 0) {
+      console.warn(`NASA educational content request failed, retrying... (${retries} attempts left)`)
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      return fetchNasaEducationalContent(query, retries - 1)
+    }
+
+    console.error('Failed to fetch NASA educational content after retries:', error)
+    return null
+  }
+}
+
+/**
+ * Obtiene múltiples contenidos educativos de la NASA
+ * 
+ * @param queries - Array de términos de búsqueda
+ * @returns Array de contenidos educativos
+ */
+export async function fetchMultipleNasaContent(queries: string[]): Promise<NasaEducationalContent[]> {
+  const contents: NasaEducationalContent[] = []
+  
+  for (const query of queries) {
+    const content = await fetchNasaEducationalContent(query)
+    if (content) {
+      contents.push(content)
+    }
+  }
+  
+  return contents
+}
+
+/**
+ * Obtiene contenido educativo de la NASA traducido
+ * 
+ * @param query - Término de búsqueda educativo
+ * @param targetLang - Idioma objetivo para traducción
+ * @returns Contenido educativo traducido o null si falla
+ */
+export async function fetchNasaEducationalContentTranslated(
+  query: string,
+  targetLang: string = 'es'
+): Promise<NasaEducationalContent | null> {
+  try {
+    const content = await fetchNasaEducationalContent(query)
+    if (!content) return null
+
+    // Importar dinámicamente para evitar problemas de SSR
+    const { translateNasaContent } = await import('./translation-api')
+    const translatedContent = await translateNasaContent(content, targetLang)
+
+    return {
+      ...content,
+      title: translatedContent.title,
+      description: translatedContent.description,
+      keywords: translatedContent.keywords
+    }
+  } catch (error) {
+    console.warn('Failed to translate NASA content:', error)
+    // Retornar contenido original si falla la traducción
+    return await fetchNasaEducationalContent(query)
+  }
+}
+

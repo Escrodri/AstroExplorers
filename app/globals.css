@@ -241,6 +241,8 @@
   background-position: 0% 0%;
   opacity: 0.3;
   animation: twinkle 20s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
 }
 
 @keyframes twinkle {

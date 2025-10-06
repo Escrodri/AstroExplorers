@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -71,6 +71,37 @@ export function CharacterSelection() {
   const { t } = useLanguage()
   const [selectedCharacter, setSelectedCharacter] = useState<string | null>(null)
   const router = useRouter()
+  
+  // Debug: Log when component mounts and theme changes
+  useEffect(() => {
+    console.log('CharacterSelection mounted')
+    
+    const updateButtonColors = () => {
+      const isDark = document.documentElement.classList.contains('dark')
+      console.log('Theme changed, current theme:', isDark ? 'dark' : 'light')
+      
+      // Update button colors based on theme
+      const backButton = document.querySelector('[data-back-button]') as HTMLElement
+      if (backButton) {
+        if (isDark) {
+          backButton.style.color = '#ffffff'
+          backButton.style.backgroundColor = 'transparent'
+        } else {
+          backButton.style.color = '#1e293b'
+          backButton.style.backgroundColor = 'transparent'
+        }
+      }
+    }
+    
+    // Update colors immediately on mount
+    updateButtonColors()
+    
+    // Listen for theme changes
+    const observer = new MutationObserver(updateButtonColors)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    
+    return () => observer.disconnect()
+  }, [])
 
   const handleStartAdventure = () => {
     console.log('handleStartAdventure called with:', selectedCharacter)
@@ -85,15 +116,62 @@ export function CharacterSelection() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-12 min-h-screen">
+    <div className="container mx-auto px-4 py-12 min-h-screen relative z-0">
       {/* Header */}
       <div className="text-center mb-8">
-        <Link href="/">
-          <Button variant="ghost" className="mb-4 text-space-deep dark:text-white hover:text-primary cursor-pointer">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            {t("characters.back")}
-          </Button>
-        </Link>
+        <button 
+          data-back-button
+          onClick={() => {
+            console.log('Back button clicked - navigating to home')
+            router.push('/')
+          }}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            padding: '8px 16px',
+            marginBottom: '16px',
+            fontSize: '14px',
+            fontWeight: '500',
+            color: '#1e293b',
+            backgroundColor: 'transparent',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+            userSelect: 'none',
+            WebkitUserSelect: 'none',
+            MozUserSelect: 'none',
+            msUserSelect: 'none',
+            pointerEvents: 'auto',
+            zIndex: 10,
+            position: 'relative'
+          }}
+          onMouseEnter={(e) => {
+            const isDark = document.documentElement.classList.contains('dark')
+            if (isDark) {
+              e.currentTarget.style.backgroundColor = '#374151'
+              e.currentTarget.style.color = '#0ea5e9'
+            } else {
+              e.currentTarget.style.backgroundColor = '#f1f5f9'
+              e.currentTarget.style.color = '#0ea5e9'
+            }
+          }}
+          onMouseLeave={(e) => {
+            const isDark = document.documentElement.classList.contains('dark')
+            if (isDark) {
+              e.currentTarget.style.backgroundColor = 'transparent'
+              e.currentTarget.style.color = '#ffffff'
+            } else {
+              e.currentTarget.style.backgroundColor = 'transparent'
+              e.currentTarget.style.color = '#1e293b'
+            }
+          }}
+        >
+          <ArrowLeft style={{ width: '16px', height: '16px' }} />
+          {t("characters.back")}
+        </button>
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-space-deep dark:text-white mb-4">{t("characters.title")}</h1>
         <p className="text-lg md:text-xl text-space-light dark:text-gray-200 max-w-2xl mx-auto text-balance leading-relaxed">
           {t("characters.subtitle")}
@@ -101,7 +179,7 @@ export function CharacterSelection() {
       </div>
 
       {/* Character Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-15 max-w-6xl mx-auto relative z-10">
         {getCharacters(t).map((character, index) => (
           <div
             key={character.id}
@@ -110,11 +188,16 @@ export function CharacterSelection() {
                 ? "border-primary shadow-2xl scale-105 bg-primary/5 dark:bg-primary/15"
                 : "border-transparent hover:border-primary/30 dark:hover:border-primary/50 hover:shadow-xl hover:scale-102 dark:border-gray-700"
             }`}
-            onClick={() => handleCharacterSelect(character.id)}
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              handleCharacterSelect(character.id)
+            }}
+            onMouseDown={(e) => e.preventDefault()}
           >
             {/* Selected badge */}
             {selectedCharacter === character.id && (
-              <div className="absolute top-4 right-4 z-10">
+              <div className="absolute top-4 right-4 z-20">
                 <Badge className="bg-primary text-white font-bold px-3 py-1">
                   <Sparkles className="w-3 h-3 mr-1" />
                   Seleccionado
@@ -123,19 +206,20 @@ export function CharacterSelection() {
             )}
 
             {/* Character Image */}
-            <div className="relative h-40 sm:h-48 bg-gradient-to-br from-primary/10 to-accent-coral/10 overflow-hidden">
+            <div className="relative h-48 sm:h-90 bg-gradient-to-br from-primary/10 to-accent-coral/10 overflow-hidden flex items-center justify-center">
               <Image
                 src={character.image || "/placeholder.svg"}
                 alt={character.name}
-                fill
-                className="object-cover"
+                width={350}
+                height={350}
+                className="object-contain w-full h-full"
                 priority={index === 0}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               />
             </div>
 
             {/* Character Info */}
-            <div className="p-4 md:p-6">
+            <div className="p-4 md:p-4">
               <h3 className="text-xl md:text-2xl font-black text-space-deep dark:text-white mb-2">{character.name}</h3>
               <p className="text-sm md:text-base text-space-light dark:text-gray-200 mb-4 leading-relaxed">{character.description}</p>
 
@@ -162,10 +246,14 @@ export function CharacterSelection() {
 
       {/* Start Button */}
       {selectedCharacter && (
-        <div className="fixed bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-50 animate-in slide-in-from-bottom-4">
+        <div className="fixed bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-30 animate-in slide-in-from-bottom-4">
           <Button
             size="lg"
-            onClick={handleStartAdventure}
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              handleStartAdventure()
+            }}
             className="text-base md:text-lg px-6 md:px-8 py-4 md:py-6 rounded-full pulse-glow bg-primary hover:bg-primary/90 text-white font-bold shadow-2xl"
           >
             {t("characters.start")}

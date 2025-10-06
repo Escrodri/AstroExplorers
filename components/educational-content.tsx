@@ -1,150 +1,83 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback, useRef } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, Sun, Zap, Radio, Shield, Sparkles, Globe } from "lucide-react"
 import { ResourcesSection } from "@/components/resources-section"
 import Link from "next/link"
 import Image from "next/image"
-import { fetchNasaImage, getCachedImages, setCachedImages } from "@/lib/services/nasa-api"
+import { fetchNasaImage, getCachedImages, setCachedImages, fetchNasaEducationalContentTranslated, type NasaEducationalContent } from "@/lib/services/nasa-api"
+import { useLanguage } from "@/lib/language-context"
 import { CACHE_KEYS } from "@/lib/constants"
+import { EducationalContentSkeleton } from "@/components/educational-content-skeleton"
+import { SimpleAudioControl } from "@/components/ui/simple-audio-control"
 
 const topics = [
   {
     id: "what-is",
-    title: "¿Qué es el Clima Espacial?",
+    titleKey: "learn.what-is.title",
     icon: Sun,
     color: "text-accent-sun",
     bgColor: "bg-accent-sun/10",
-    content: {
-      description:
-        "El clima espacial es lo que sucede en el espacio que puede afectar a la Tierra y nuestra tecnología. ¡Así como la Tierra tiene clima con lluvia, viento y tormentas, el espacio tiene su propio tipo de clima!",
-      image: "/placeholder.svg?height=600&width=800",
-      facts: [
-        "El clima espacial proviene del Sol, que es una bola gigante de gas caliente",
-        "El Sol envía constantemente energía y partículas llamadas viento solar",
-        "A veces el Sol tiene grandes explosiones llamadas erupciones solares",
-        "Estas explosiones pueden enviar enormes nubes de partículas hacia la Tierra",
-        "¡El clima espacial puede afectar satélites, redes eléctricas e incluso auroras!",
-      ],
-      funFact:
-        "¡El Sol es tan grande que podrías meter más de 1 millón de Tierras dentro de él! Y está a 93 millones de millas de distancia de nosotros.",
-    },
+    contentKey: "what-is",
   },
   {
     id: "solar-flares",
-    title: "Erupciones Solares",
+    titleKey: "learn.solar-flares.title",
     icon: Zap,
     color: "text-accent-coral",
     bgColor: "bg-accent-coral/10",
-    content: {
-      description:
-        "Las erupciones solares son como explosiones gigantes en la superficie del Sol. ¡Liberan tanta energía como miles de millones de bombas nucleares en solo unos minutos!",
-      image: "/placeholder.svg?height=600&width=800",
-      facts: [
-        "Las erupciones solares ocurren cuando la energía magnética se acumula y se libera repentinamente",
-        "Envían luz, rayos X y otros tipos de radiación",
-        "La luz de una erupción solar llega a la Tierra en solo 8 minutos",
-        "Las erupciones solares se clasifican por tamaño: A, B, C, M y X (¡X es la más grande!)",
-        "Pueden interrumpir las comunicaciones por radio y dañar satélites",
-      ],
-      funFact:
-        "¡La erupción solar más grande jamás registrada ocurrió en 2003. Fue tan poderosa que sobrecargó los sensores que la medían!",
-    },
+    contentKey: "solar-flares",
   },
   {
     id: "cme",
-    title: "Eyecciones de Masa Coronal (CME)",
+    titleKey: "learn.cme.title",
     icon: Radio,
     color: "text-primary",
     bgColor: "bg-primary/10",
-    content: {
-      description:
-        "Una Eyección de Masa Coronal (CME) es como una burbuja gigante de partículas que el Sol expulsa al espacio. ¡Estas burbujas pueden ser más grandes que la Tierra!",
-      image: "/placeholder.svg?height=600&width=800",
-      facts: [
-        "Las CME contienen miles de millones de toneladas de partículas del Sol",
-        "Viajan a través del espacio a velocidades de 1-3 millones de millas por hora",
-        "Tarda de 1 a 3 días para que una CME llegue a la Tierra",
-        "Cuando una CME golpea el campo magnético de la Tierra, crea una tormenta geomagnética",
-        "Las CME son la causa principal de los efectos fuertes del clima espacial en la Tierra",
-      ],
-      funFact: "¡Si pudieras ver una CME desde el espacio, parecería una nube gigante brillante alejándose del Sol!",
-    },
+    contentKey: "cme",
   },
   {
     id: "magnetosphere",
-    title: "El Escudo Magnético de la Tierra",
+    titleKey: "learn.magnetosphere.title",
     icon: Shield,
     color: "text-space-light",
     bgColor: "bg-space-light/10",
-    content: {
-      description:
-        "La Tierra tiene un campo de fuerza invisible llamado magnetosfera que nos protege del clima espacial. ¡Es como un escudo de superhéroe alrededor de nuestro planeta!",
-      image: "/placeholder.svg?height=600&width=800",
-      facts: [
-        "La magnetosfera es creada por el campo magnético de la Tierra",
-        "Desvía la mayor parte del viento solar lejos de la Tierra",
-        "Sin ella, la radiación solar eliminaría nuestra atmósfera",
-        "Durante las tormentas solares, la magnetosfera se comprime y perturba",
-        "La magnetosfera se extiende unas 40,000 millas en el espacio del lado soleado",
-      ],
-      funFact:
-        "¡El campo magnético de la Tierra es creado por hierro líquido que gira en el núcleo del planeta, miles de millas bajo tus pies!",
-    },
+    contentKey: "magnetosphere",
   },
   {
     id: "auroras",
-    title: "Auroras (Luces del Norte y del Sur)",
+    titleKey: "learn.auroras.title",
     icon: Sparkles,
     color: "text-primary",
     bgColor: "bg-primary/10",
-    content: {
-      description:
-        "Las auroras son hermosas luces coloridas que bailan en el cielo cerca de los Polos Norte y Sur. ¡Son creadas por el clima espacial!",
-      image: "/placeholder.svg?height=600&width=800",
-      facts: [
-        "Las auroras ocurren cuando las partículas solares golpean los gases en la atmósfera de la Tierra",
-        "Las auroras verdes son creadas por oxígeno a altitudes más bajas",
-        "Las auroras rojas son creadas por oxígeno a altitudes más altas",
-        "Las auroras azules y moradas son creadas por nitrógeno",
-        "Las mejores auroras ocurren durante tormentas geomagnéticas fuertes",
-      ],
-      funFact:
-        "¡Las auroras también ocurren en otros planetas! ¡Júpiter y Saturno tienen auroras que son incluso más grandes que las de la Tierra!",
-    },
+    contentKey: "auroras",
   },
   {
     id: "impacts",
-    title: "Cómo Nos Afecta el Clima Espacial",
+    titleKey: "learn.impacts.title",
     icon: Globe,
     color: "text-accent-coral",
     bgColor: "bg-accent-coral/10",
-    content: {
-      description:
-        "¡El clima espacial puede parecer lejano, pero en realidad puede afectar nuestra vida diaria aquí en la Tierra de maneras sorprendentes!",
-      image: "/placeholder.svg?height=600&width=800",
-      facts: [
-        "La navegación GPS puede volverse menos precisa durante las tormentas solares",
-        "Las comunicaciones por radio pueden interrumpirse, afectando a pilotos y servicios de emergencia",
-        "Las redes eléctricas pueden dañarse, causando potencialmente apagones",
-        "Los satélites pueden dañarse o cambiar sus órbitas",
-        "Los astronautas en el espacio necesitan protección extra contra la radiación",
-        "¡Incluso los oleoductos pueden verse afectados por corrientes eléctricas inducidas!",
-      ],
-      funFact:
-        "En 1989, una tormenta geomagnética causó un apagón de 9 horas en Quebec, Canadá, afectando a 6 millones de personas. ¡La misma tormenta hizo que las auroras fueran visibles hasta Texas!",
-    },
+    contentKey: "impacts",
   },
 ]
 
 export function EducationalContent() {
+  const { language, t } = useLanguage()
   const [selectedTopic, setSelectedTopic] = useState(topics[0].id)
   const currentTopic = topics.find((t) => t.id === selectedTopic) || topics[0]
   const Icon = currentTopic.icon
   const [nasaImages, setNasaImages] = useState<string[]>([])
   const [nasaIndex, setNasaIndex] = useState<number>(0)
+  const [imageLoaded, setImageLoaded] = useState<boolean>(false)
+  const [preloadedImages, setPreloadedImages] = useState<Set<string>>(new Set())
+  const [nasaContent, setNasaContent] = useState<NasaEducationalContent | null>(null)
+  const [contentLoaded, setContentLoaded] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isImageLoading, setIsImageLoading] = useState<boolean>(true)
+  const loadingImageRef = useRef<string | null>(null)
   const topicQuery: Record<string, string> = {
     "what-is": "space weather",
     "solar-flares": "solar flares",
@@ -153,28 +86,82 @@ export function EducationalContent() {
     "auroras": "aurora borealis aurora australis",
     "impacts": "space weather impacts technology",
   }
+
+  // Función para pre-cargar imágenes (memoizada)
+  const preloadImage = useCallback((src: string): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      const img = new (window as any).Image()
+      img.onload = () => resolve()
+      img.onerror = reject
+      img.src = src
+    })
+  }, [])
   useEffect(() => {
+    setIsLoading(true)
+    setIsImageLoading(true)
     setNasaImages([])
     setNasaIndex(0)
+    setImageLoaded(false)
+    setNasaContent(null)
+    setContentLoaded(false)
     
     const sessionKey = CACHE_KEYS.NASA_IMAGES + selectedTopic
+    const contentKey = CACHE_KEYS.NASA_IMAGES + selectedTopic + '_content'
+    
+    // Intentar cargar contenido educativo cacheadas
+    const cachedContent = getCachedImages(contentKey)
+    if (cachedContent.length > 0) {
+      try {
+        const content = JSON.parse(cachedContent[0])
+        setNasaContent(content)
+        setContentLoaded(true)
+        setIsLoading(false)
+      } catch (error) {
+        console.warn('Failed to parse cached content:', error)
+      }
+    }
     
     // Intentar cargar imágenes cacheadas
     const cachedImages = getCachedImages(sessionKey)
     if (cachedImages.length > 0) {
       setNasaImages(cachedImages)
-      return
+      // Pre-cargar la primera imagen inmediatamente
+      preloadImage(cachedImages[0])
+        .then(() => {
+          setPreloadedImages(prev => new Set([...prev, cachedImages[0]]))
+          setImageLoaded(true)
+          setIsImageLoading(false)
+        })
+        .catch(() => {
+          setImageLoaded(true)
+          setIsImageLoading(false)
+        })
     }
 
-    // Cargar imágenes desde API
+    // Cargar contenido educativo y imágenes desde API
     const query = topicQuery[selectedTopic] || "space weather"
     const controller = new AbortController()
     
-    const loadImages = async () => {
+    const loadContent = async () => {
+      // Cargar contenido educativo traducido
+      const educationalContent = await fetchNasaEducationalContentTranslated(query, language)
+      if (educationalContent) {
+        setNasaContent(educationalContent)
+        setContentLoaded(true)
+        setIsLoading(false)
+        setCachedImages(contentKey, [JSON.stringify(educationalContent)])
+      }
+      
+      // Cargar imágenes adicionales
       const imageUrls: string[] = []
       
-      // Intentar obtener múltiples imágenes
-      for (let i = 0; i < 12; i++) {
+      // Si tenemos contenido educativo, usar su imagen
+      if (educationalContent?.image) {
+        imageUrls.push(educationalContent.image)
+      }
+      
+      // Intentar obtener múltiples imágenes adicionales
+      for (let i = 0; i < 8; i++) {
         const imageUrl = await fetchNasaImage(query)
         if (imageUrl && !imageUrls.includes(imageUrl)) {
           imageUrls.push(imageUrl)
@@ -187,134 +174,323 @@ export function EducationalContent() {
       if (imageUrls.length > 0) {
         setNasaImages(imageUrls)
         setCachedImages(sessionKey, imageUrls)
+        
+        // Pre-cargar la primera imagen
+        preloadImage(imageUrls[0])
+          .then(() => {
+            setPreloadedImages(prev => new Set([...prev, imageUrls[0]]))
+            setImageLoaded(true)
+            setIsImageLoading(false)
+          })
+          .catch(() => {
+            setImageLoaded(true)
+            setIsImageLoading(false)
+          })
       }
     }
     
-    loadImages()
+    loadContent()
     
     return () => controller.abort()
-  }, [selectedTopic])
+  }, [selectedTopic, language])
+
+  // Efecto para manejar el cambio de índice de imagen
+  useEffect(() => {
+    if (nasaImages.length > 0) {
+      const currentImageUrl = nasaImages[nasaIndex % nasaImages.length]
+      
+      // Evitar cargar la misma imagen múltiples veces
+      if (loadingImageRef.current === currentImageUrl) {
+        return
+      }
+      
+      // Si la imagen ya está pre-cargada, mostrarla inmediatamente
+      if (preloadedImages.has(currentImageUrl)) {
+        setImageLoaded(true)
+        setIsImageLoading(false)
+        loadingImageRef.current = null
+      } else {
+        // Pre-cargar la nueva imagen
+        loadingImageRef.current = currentImageUrl
+        setImageLoaded(false)
+        setIsImageLoading(true)
+        preloadImage(currentImageUrl)
+          .then(() => {
+            setPreloadedImages(prev => new Set([...prev, currentImageUrl]))
+            setImageLoaded(true)
+            setIsImageLoading(false)
+            loadingImageRef.current = null
+          })
+          .catch(() => {
+            setImageLoaded(true)
+            setIsImageLoading(false)
+            loadingImageRef.current = null
+          })
+      }
+    }
+  }, [nasaIndex, nasaImages, preloadImage])
+
+  // Mostrar skeleton mientras carga
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-6">
+        {/* Header */}
+        <div className="mb-6">
+          <Link href="/">
+            <Button variant="ghost" className="mb-4 text-space-deep dark:text-white hover:text-primary">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              {t("learn.back")}
+            </Button>
+          </Link>
+          <h1 className="text-3xl md:text-4xl font-black text-space-deep dark:text-white mb-3 text-center">
+            {t("learn.title")}
+          </h1>
+          <p className="text-lg text-space-light dark:text-gray-200 max-w-2xl mx-auto text-center text-balance leading-relaxed">
+            {t("learn.subtitle")}
+          </p>
+        </div>
+
+        {/* Topic Selection */}
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-3 mb-6">
+            {topics.map((topic) => {
+              const TopicIcon = topic.icon
+              return (
+                <Card
+                  key={topic.id}
+                  className={`p-3 cursor-pointer transition-all border-2 ${
+                    selectedTopic === topic.id
+                      ? "border-primary bg-primary/5"
+                      : "border-gray-200 dark:border-gray-700 hover:border-primary/50"
+                  }`}
+                  onClick={() => setSelectedTopic(topic.id)}
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <TopicIcon className={`w-6 h-6 mb-2 ${topic.color}`} />
+                    <span className="text-xs font-medium text-space-deep dark:text-white">
+                      {t(topic.titleKey)}
+                    </span>
+                  </div>
+                </Card>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Skeleton Content */}
+        <EducationalContentSkeleton />
+      </div>
+    )
+  }
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-2 py-3 md:px-4 md:py-6">
       {/* Header */}
-      <div className="mb-12">
+      <div className="mb-3 md:mb-6">
         <Link href="/">
-          <Button variant="ghost" className="mb-6 text-space-deep dark:text-white hover:text-primary">
+          <Button variant="ghost" className="mb-2 text-space-deep dark:text-white hover:text-primary text-sm">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Volver al Inicio
+            {t("learn.back")}
           </Button>
         </Link>
-        <h1 className="text-5xl md:text-7xl font-black text-space-deep dark:text-white mb-4 text-center">
-          Aprende Sobre el Clima Espacial
+        <h1 className="text-xl md:text-3xl font-black text-space-deep dark:text-white mb-2 text-center">
+          {t("learn.title")}
         </h1>
-        <p className="text-xl text-space-light dark:text-gray-200 max-w-3xl mx-auto text-center text-balance leading-relaxed">
-          ¡Descubre la ciencia increíble detrás de las tormentas solares, auroras y cómo el Sol afecta a la Tierra!
+        <p className="text-sm md:text-lg text-space-light dark:text-gray-200 text-center leading-relaxed max-w-2xl mx-auto">
+          {t("learn.subtitle")}
         </p>
       </div>
 
       {/* Topic Selection */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+      <div className="max-w-6xl mx-auto mb-3 md:mb-6">
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-2 md:gap-3">
         {topics.map((topic) => {
           const TopicIcon = topic.icon
           return (
             <Card
               key={topic.id}
-              className={`p-4 cursor-pointer transition-all border-2 ${
+              className={`p-2 md:p-3 cursor-pointer transition-all border-2 ${
                 selectedTopic === topic.id
-                  ? "border-primary shadow-xl scale-105 bg-primary/5 dark:bg-primary/15"
-                  : "border-transparent hover:border-primary/30 dark:hover:border-primary/50 hover:shadow-lg bg-white dark:bg-gray-900 dark:border-gray-700"
+                  ? "border-primary shadow-lg scale-105 bg-primary/5 dark:bg-primary/15"
+                  : "border-transparent hover:border-primary/30 dark:hover:border-primary/50 hover:shadow-md bg-white dark:bg-gray-900 dark:border-gray-700"
               }`}
               onClick={() => setSelectedTopic(topic.id)}
             >
-              <div className={`w-12 h-12 rounded-xl ${topic.bgColor} flex items-center justify-center mb-3 mx-auto`}>
-                <TopicIcon className={`w-6 h-6 ${topic.color}`} />
+              <div className={`w-8 h-8 md:w-10 md:h-10 rounded-lg ${topic.bgColor} flex items-center justify-center mb-1 md:mb-2 mx-auto`}>
+                <TopicIcon className={`w-4 h-4 md:w-5 md:h-5 ${topic.color}`} />
               </div>
-              <h3 className="text-sm font-bold text-space-deep dark:text-white text-center leading-tight">{topic.title}</h3>
+              <h3 className="text-xs md:text-sm font-bold text-space-deep dark:text-white text-center leading-tight">{t(topic.titleKey)}</h3>
             </Card>
           )
         })}
+        </div>
       </div>
 
       {/* Topic Content */}
-      <Card className="p-8 md:p-12 border-4 border-primary/20 bg-white dark:bg-gray-900">
+      <div className="max-w-6xl mx-auto">
+        <Card className="p-3 md:p-6 border-4 border-primary/20 bg-white dark:bg-gray-900">
         {/* Topic Header */}
-        <div className="flex items-center gap-4 mb-6">
+        <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
           <div
-            className={`w-16 h-16 rounded-2xl ${currentTopic.bgColor} flex items-center justify-center flex-shrink-0`}
+            className={`w-8 h-8 md:w-12 md:h-12 rounded-xl ${currentTopic.bgColor} flex items-center justify-center flex-shrink-0`}
           >
-            <Icon className={`w-8 h-8 ${currentTopic.color}`} />
+            <Icon className={`w-4 h-4 md:w-6 md:h-6 ${currentTopic.color}`} />
           </div>
-          <h2 className="text-4xl font-black text-space-deep dark:text-white">{currentTopic.title}</h2>
+          <h2 className="text-lg md:text-2xl font-black text-space-deep dark:text-white">{t(currentTopic.titleKey)}</h2>
         </div>
 
         {/* Description */}
-        <p className="text-xl text-space-light dark:text-gray-200 mb-8 leading-relaxed">{currentTopic.content.description}</p>
-
-        {/* Image */}
-        <div className="relative h-64 md:h-96 rounded-2xl overflow-hidden mb-8 bg-gradient-to-br from-primary/10 to-accent-coral/10">
-          <Image
-            src={
-              nasaImages.length > 0
-                ? nasaImages[nasaIndex % nasaImages.length]
-                : currentTopic.content.image || "/placeholder.svg"
-            }
-            alt={currentTopic.title}
-            fill
-            className="object-cover"
-            priority={nasaIndex === 0}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+        <div className="mb-3 md:mb-4">
+          <div className="flex items-start gap-2">
+            <p className="text-sm md:text-lg text-space-light dark:text-gray-200 leading-relaxed flex-1">{t(`learn.${currentTopic.contentKey}.description`)}</p>
+            <SimpleAudioControl 
+              text={t(`learn.${currentTopic.contentKey}.description`)}
+              size="sm"
+              className="flex-shrink-0 mt-1"
+            />
+          </div>
         </div>
 
-        {nasaImages.length > 1 && (
-          <div className="flex justify-center mb-8">
-            <Button
-              variant="outline"
-              className="border-2 border-space-deep/20 dark:border-white/30 text-space-deep dark:text-white bg-white/80 dark:bg-gray-900/80"
-              onClick={() => setNasaIndex((i) => (i + 1) % nasaImages.length)}
-            >
-              Ver otra
-            </Button>
+        {/* NASA Educational Content */}
+        {nasaContent && contentLoaded && (
+          <div className="mb-3 md:mb-4 p-3 md:p-4 bg-gradient-to-r from-primary/10 to-accent-coral/10 dark:from-primary/15 dark:to-accent-coral/15 rounded-lg border-l-4 border-primary">
+            <div className="flex items-start gap-2 md:gap-3">
+              <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                <Globe className="w-3 h-3 md:w-4 md:h-4 text-primary" />
+              </div>
+              <div className="flex-1">
+                <div className="mb-2 md:mb-3">
+                  <h3 className="text-sm md:text-lg font-black text-space-deep dark:text-white">
+                    {nasaContent.title}
+                  </h3>
+                  <div className="flex gap-1 md:gap-2">
+                    <span className="px-2 py-1 md:px-3 md:py-1.5 bg-accent-coral/20 text-accent-coral text-xs md:text-sm font-medium rounded-full">
+                      NASA
+                    </span>
+                    {language !== 'en' && (
+                      <span className="px-2 py-1 md:px-3 md:py-1.5 bg-accent-sun/20 text-accent-sun text-xs md:text-sm font-medium rounded-full">
+                        Traducido
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-start gap-2">
+                    <p className="text-sm md:text-base text-space-light dark:text-gray-200 leading-relaxed flex-1">
+                      {nasaContent.description}
+                    </p>
+                    <SimpleAudioControl 
+                      text={nasaContent.description}
+                      size="sm"
+                      className="flex-shrink-0 mt-1"
+                    />
+                  </div>
+                </div>
+                {nasaContent.keywords && nasaContent.keywords.length > 0 && (
+                  <div className="flex flex-wrap gap-1">
+                    {nasaContent.keywords.slice(0, 5).map((keyword, index) => (
+                      <span
+                        key={index}
+                        className="px-2 py-1 bg-primary/20 text-primary text-xs font-medium rounded-full"
+                      >
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         )}
 
+        {/* Image */}
+        <div className="relative h-80 md:h-96 lg:h-[28rem] rounded-lg overflow-hidden mb-3 md:mb-4 bg-gradient-to-br from-primary/10 to-accent-coral/10">
+          {isImageLoading ? (
+            <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 animate-pulse flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-gray-400 dark:bg-gray-600 rounded-full mx-auto mb-2 animate-pulse"></div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">Cargando imagen...</div>
+              </div>
+            </div>
+          ) : nasaImages.length > 0 && imageLoaded ? (
+            <Image
+              src={nasaImages[nasaIndex % nasaImages.length]}
+              alt={t(currentTopic.titleKey)}
+              fill
+              className="object-cover"
+              priority={nasaIndex === 0}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-gray-400 dark:bg-gray-600 rounded-full mx-auto mb-2"></div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">Sin imagen disponible</div>
+              </div>
+            </div>
+          )}
+        </div>
+
+
         {/* Facts */}
-        <div className="mb-8">
-          <h3 className="text-2xl font-black text-space-deep dark:text-white mb-4">Datos Clave:</h3>
-          <div className="space-y-3">
-            {currentTopic.content.facts.map((fact, index) => (
-              <div key={index} className="flex items-start gap-3 p-4 bg-accent-sun/5 rounded-lg">
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-sm font-black text-primary">{index + 1}</span>
+        <div className="mb-3 md:mb-4">
+          <h3 className="text-lg md:text-xl font-black text-space-deep dark:text-white mb-2 md:mb-3">{t("learn.keyFacts")}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
+            {[1, 2, 3, 4, 5].map((index) => (
+              <div key={index} className="flex items-start gap-2 md:gap-3 p-2 md:p-3 bg-accent-sun/5 rounded-lg">
+                <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="text-sm md:text-base font-black text-primary">{index}</span>
                 </div>
-                <p className="text-lg text-space-light dark:text-gray-200 leading-relaxed">{fact}</p>
+                <div className="flex-1">
+                  <div className="flex items-start gap-2">
+                    <p className="text-sm md:text-base text-space-light dark:text-gray-200 leading-relaxed flex-1">
+                      {t(`learn.${currentTopic.contentKey}.fact${index}`)}
+                    </p>
+                    <SimpleAudioControl 
+                      text={t(`learn.${currentTopic.contentKey}.fact${index}`)}
+                      size="sm"
+                      className="flex-shrink-0 mt-1"
+                    />
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
 
         {/* Fun Fact */}
-        <div className="bg-gradient-to-r from-primary/10 to-accent-coral/10 dark:from-primary/15 dark:to-accent-coral/15 rounded-2xl p-6 border-l-4 border-primary">
-          <div className="flex items-start gap-3">
-            <Sparkles className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
-            <div>
-              <p className="font-black text-space-deep dark:text-white mb-2 text-lg">¡Dato Curioso!</p>
-              <p className="text-space-light dark:text-gray-200 leading-relaxed">{currentTopic.content.funFact}</p>
+        <div className="bg-gradient-to-r from-primary/10 to-accent-coral/10 dark:from-primary/15 dark:to-accent-coral/15 rounded-lg p-3 md:p-4 border-l-4 border-primary">
+          <div className="flex items-start gap-2 md:gap-3">
+            <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-primary mt-0.5 flex-shrink-0" />
+            <div className="flex-1">
+              <p className="font-black text-space-deep dark:text-white mb-2 md:mb-3 text-sm md:text-base">{t("learn.funFact")}</p>
+              <div>
+                <div className="flex items-start gap-2">
+                  <p className="text-sm md:text-base text-space-light dark:text-gray-200 leading-relaxed flex-1">
+                    {t(`learn.${currentTopic.contentKey}.funFact`)}
+                  </p>
+                  <SimpleAudioControl 
+                    text={t(`learn.${currentTopic.contentKey}.funFact`)}
+                    size="sm"
+                    className="flex-shrink-0 mt-1"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </Card>
+        </Card>
+      </div>
 
       {/* CTA */}
-      <div className="mt-12 text-center">
-        <p className="text-xl text-space-light dark:text-gray-200 mb-6">¿Listo para experimentar el clima espacial tú mismo?</p>
+      <div className="mt-4 md:mt-6 text-center">
+        <p className="text-sm md:text-base text-space-light dark:text-gray-200 mb-3 md:mb-4">{t("learn.cta")}</p>
         <Link href="/characters">
           <Button
             size="lg"
-            className="bg-primary hover:bg-primary/90 text-white font-bold text-lg px-8 py-6 rounded-full"
+            className="bg-primary hover:bg-primary/90 text-white font-bold text-sm md:text-base px-6 md:px-8 py-3 md:py-4 rounded-full"
           >
-            Comienza Tu Aventura
+            {t("learn.cta.start")}
           </Button>
         </Link>
       </div>

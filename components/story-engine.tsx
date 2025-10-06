@@ -12,6 +12,7 @@ import { getStoryData } from "@/lib/story-data"
 import { useLanguage } from "@/lib/language-context"
 import { STORY_CONFIG } from "@/lib/constants"
 import { interpolate } from "@/lib/i18n-utils"
+import { AudioControls } from "@/components/ui/audio-controls"
 
 interface StoryEngineProps {
   characterId: string
@@ -189,7 +190,15 @@ export function StoryEngine({ characterId }: StoryEngineProps) {
 
           {/* Scene Description */}
           <div className="prose prose-lg max-w-none mb-6">
-            <p className="text-lg text-space-light dark:text-gray-200 leading-relaxed">{scene.description}</p>
+            <div className="flex items-start gap-3">
+              <p className="text-lg text-space-light dark:text-gray-200 leading-relaxed flex-1">{scene.description}</p>
+              <AudioControls 
+                text={scene.description}
+                size="md"
+                showSettings={true}
+                className="flex-shrink-0 mt-1"
+              />
+            </div>
           </div>
 
           {/* Educational Info */}
@@ -197,9 +206,16 @@ export function StoryEngine({ characterId }: StoryEngineProps) {
             <div className="bg-accent-sun/10 dark:bg-accent-sun/15 rounded-lg p-4 mb-6 border-l-4 border-accent-sun">
               <div className="flex items-start gap-3">
                 <AlertTriangle className="w-5 h-5 text-accent-sun mt-1 flex-shrink-0" />
-                <div>
+                <div className="flex-1">
                   <p className="font-bold text-space-deep dark:text-white mb-1">{t("story.didYouKnow")}</p>
-                  <p className="text-space-light dark:text-gray-200">{scene.educationalInfo}</p>
+                  <div className="flex items-start gap-3">
+                    <p className="text-space-light dark:text-gray-200 flex-1">{scene.educationalInfo}</p>
+                    <AudioControls 
+                      text={scene.educationalInfo}
+                      size="sm"
+                      className="flex-shrink-0 mt-1"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -212,16 +228,32 @@ export function StoryEngine({ characterId }: StoryEngineProps) {
           {scene.choices.map((choice, index) => (
             <Card
               key={index}
-              className="p-6 cursor-pointer transition-all hover:border-primary hover:shadow-xl hover:-translate-y-1 border-2 border-transparent bg-white dark:bg-gray-900 dark:border-gray-700"
+              className="p-6 cursor-pointer transition-all duration-300 hover:border-primary hover:shadow-xl hover:-translate-y-1 hover:bg-primary/5 dark:hover:bg-primary/10 border-2 border-transparent bg-white dark:bg-gray-900 dark:border-gray-700 group"
               onClick={() => handleChoice(choice.id, choice.nextScene)}
             >
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <span className="text-lg font-black text-primary">{String.fromCharCode(65 + index)}</span>
+                <div className="w-10 h-10 rounded-full bg-primary/10 group-hover:bg-primary/20 group-hover:scale-110 flex items-center justify-center flex-shrink-0 transition-all duration-300">
+                  <span className="text-lg font-black text-primary group-hover:text-primary/80">{String.fromCharCode(65 + index)}</span>
                 </div>
                 <div className="flex-1">
-                  <p className="text-lg font-bold text-space-deep dark:text-white mb-2">{choice.text}</p>
-                  {choice.hint && <p className="text-sm text-space-light dark:text-gray-300">{choice.hint}</p>}
+                  <div className="flex items-start gap-3 mb-2">
+                    <p className="text-lg font-bold text-space-deep dark:text-white flex-1">{choice.text}</p>
+                    <AudioControls 
+                      text={choice.text}
+                      size="sm"
+                      className="flex-shrink-0 mt-1"
+                    />
+                  </div>
+                  {choice.hint && (
+                    <div className="flex items-start gap-3">
+                      <p className="text-sm text-space-light dark:text-gray-300 flex-1">{choice.hint}</p>
+                      <AudioControls 
+                        text={choice.hint}
+                        size="sm"
+                        className="flex-shrink-0 mt-0.5"
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             </Card>

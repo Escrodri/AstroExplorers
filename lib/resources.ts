@@ -1,80 +1,78 @@
 export type ResourceItem = {
-  title: string
-  description: string
+  titleKey: string
+  descriptionKey: string
   url: string
   source: "NASA" | "NOAA" | "CSA" | "AEB" | "Other"
 }
 
 export type ResourceCategory = {
   id: string
-  title: string
+  titleKey: string
   items: ResourceItem[]
 }
 
 export const resourceCategories: ResourceCategory[] = [
   {
     id: "nasa",
-    title: "NASA",
+    titleKey: "resources.nasa.title",
     items: [
       {
-        title: "NASA Space Weather Website",
-        description:
-          "Panorama general del clima espacial y el programa de NASA para apoyar a comunidades afectadas.",
+        titleKey: "resources.nasa.spaceWeather.title",
+        descriptionKey: "resources.nasa.spaceWeather.description",
         url: "https://science.nasa.gov/heliophysics/space-weather/",
         source: "NASA",
       },
       {
-        title: "Solar Storms and Flares",
-        description:
-          "Explicación de fenómenos: erupciones solares, eyecciones de masa coronal y ciclo solar.",
-        url: "https://science.nasa.gov/sun/solar-flares/",
+        titleKey: "resources.nasa.solarStorms.title",
+        descriptionKey: "resources.nasa.solarStorms.description",
+        url: "https://www.nasa.gov/sun/",
         source: "NASA",
       },
       {
-        title: "Space Weather Centers of Excellence",
-        description:
-          "Tres proyectos centrados en mitigar impactos del clima espacial en activos espaciales.",
+        titleKey: "resources.nasa.centers.title",
+        descriptionKey: "resources.nasa.centers.description",
         url: "https://science.nasa.gov/heliophysics/programs/",
         source: "NASA",
       },
       {
-        title: "NASA Heliophysics Fleet",
-        description:
-          "Visualización de la flota de misiones heliosféricas actuales de NASA.",
-        url: "https://science.nasa.gov/heliophysics/fleet/",
+        titleKey: "resources.nasa.fleet.title",
+        descriptionKey: "resources.nasa.fleet.description",
+        url: "https://science.nasa.gov/heliophysics/",
         source: "NASA",
       },
       {
-        title: "NASA Space Weather (Visión general)",
-        description:
-          "Información de referencia sobre clima espacial en NASA Science (inglés).",
-        url: "https://science.nasa.gov/space-weather/",
+        titleKey: "resources.nasa.overview.title",
+        descriptionKey: "resources.nasa.overview.description",
+        url: "https://www.nasa.gov/space-weather/",
+        source: "NASA",
+      },
+      {
+        titleKey: "resources.nasa.spacePlace.title",
+        descriptionKey: "resources.nasa.spacePlace.description",
+        url: "https://spaceplace.nasa.gov/",
         source: "NASA",
       },
     ],
   },
   {
     id: "noaa",
-    title: "NOAA",
+    titleKey: "resources.noaa.title",
     items: [
       {
-        title: "NOAA SWPC",
-        description:
-          "Centro de Predicción del Clima Espacial: pronósticos y datos operativos.",
+        titleKey: "resources.noaa.swpc.title",
+        descriptionKey: "resources.noaa.swpc.description",
         url: "https://www.swpc.noaa.gov/",
         source: "NOAA",
       },
       {
-        title: "Five Things: Space Weather",
-        description:
-          "Cinco claves sobre el clima espacial y su observación.",
-        url: "https://www.noaa.gov/education/resource-collections/space-weather/five-things-space-weather",
+        titleKey: "resources.noaa.fiveThings.title",
+        descriptionKey: "resources.noaa.fiveThings.description",
+        url: "https://www.noaa.gov/education/resource-collections/weather-and-atmosphere/space-weather",
         source: "NOAA",
       },
       {
-        title: "Guía ciclo solar y clima espacial (NESDIS)",
-        description:
-          "Introducción al ciclo solar y recursos educativos.",
+        titleKey: "resources.noaa.guide.title",
+        descriptionKey: "resources.noaa.guide.description",
         url: "https://www.nesdis.noaa.gov/una-guia-sobre-el-ciclo-solar-y-el-clima-espacial",
         source: "NOAA",
       },
@@ -82,19 +80,17 @@ export const resourceCategories: ResourceCategory[] = [
   },
   {
     id: "csa",
-    title: "CSA (Canadá)",
+    titleKey: "resources.csa.title",
     items: [
       {
-        title: "Space Weather Canada",
-        description:
-          "Condiciones actuales, datos y servicios; recursos para aprender más.",
+        titleKey: "resources.csa.spaceWeather.title",
+        descriptionKey: "resources.csa.spaceWeather.description",
         url: "https://spaceweather.gc.ca/",
         source: "CSA",
       },
       {
-        title: "Space Weather over Canada",
-        description:
-          "Información sobre la importancia del pronóstico y su impacto en tecnología y vida diaria.",
+        titleKey: "resources.csa.overview.title",
+        descriptionKey: "resources.csa.overview.description",
         url: "https://www.asc-csa.gc.ca/eng/astronomy/space-weather.asp",
         source: "CSA",
       },
@@ -102,20 +98,34 @@ export const resourceCategories: ResourceCategory[] = [
   },
   {
     id: "aeb",
-    title: "AEB (Brasil)",
+    titleKey: "resources.aeb.title",
     items: [
       {
-        title: "EMBRACE - Programa Brasileño de Clima Espacial",
-        description:
-          "Plataforma con datos en tiempo real, archivos históricos y modelos de pronóstico.",
-        url: "https://www2.inpe.br/climaespacial/",
+        titleKey: "resources.aeb.spaceWeather.title",
+        descriptionKey: "resources.aeb.spaceWeather.description",
+        url: "https://www.gov.br/aeb/",
         source: "AEB",
+      },
+    ],
+  },
+  {
+    id: "other",
+    titleKey: "resources.other.title",
+    items: [
+      {
+        titleKey: "resources.other.esa.title",
+        descriptionKey: "resources.other.esa.description",
+        url: "https://www.esa.int/Science_Exploration/Space_Science/Space_weather",
+        source: "Other",
+      },
+      {
+        titleKey: "resources.other.jaxa.title",
+        descriptionKey: "resources.other.jaxa.description",
+        url: "https://www.jaxa.jp/",
+        source: "Other",
       },
     ],
   },
 ]
 
-export const resourceDisclaimer =
-  "NASA no respalda entidades no gubernamentales. Cumple con los parámetros de uso de datos de cada sitio."
-
-
+export const resourceDisclaimer = "Enlaces a sitios web oficiales de agencias espaciales y meteorológicas para información autorizada sobre clima espacial."

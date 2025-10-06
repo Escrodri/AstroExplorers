@@ -244,7 +244,7 @@ export const getStoryData = (t: (key: string) => string): Record<string, Story> 
       {
         title: t("story.farmer.scene3.title"),
         description: t("story.farmer.scene3.description"),
-        image: "/placeholder.svg?height=600&width=800",
+        image: "/friendly-farmer-character-in-field-with-hat-and-ov.jpg",
         educationalInfo: t("story.farmer.scene3.educationalInfo"),
         choices: [
           {
@@ -275,7 +275,7 @@ export const getStoryData = (t: (key: string) => string): Record<string, Story> 
       {
         title: t("story.engineer.scene1.title"),
         description: t("story.engineer.scene1.description"),
-        image: "/placeholder.svg?height=600&width=800",
+        image: "/electrical-engineer-character-with-hard-hat-and-to.jpg",
         educationalInfo: t("story.engineer.scene1.educationalInfo"),
         choices: [
           {
@@ -295,7 +295,7 @@ export const getStoryData = (t: (key: string) => string): Record<string, Story> 
       {
         title: t("story.engineer.scene2.title"),
         description: t("story.engineer.scene2.description"),
-        image: "/placeholder.svg?height=600&width=800",
+        image: "/engineer-character-with-tools.jpg",
         educationalInfo: t("story.engineer.scene2.educationalInfo"),
         choices: [
           {
@@ -315,7 +315,7 @@ export const getStoryData = (t: (key: string) => string): Record<string, Story> 
       {
         title: t("story.engineer.scene3.title"),
         description: t("story.engineer.scene3.description"),
-        image: "/placeholder.svg?height=600&width=800",
+        image: "/space-station-interior-with-red-warning-lights-and.jpg",
         educationalInfo: t("story.engineer.scene3.educationalInfo"),
         choices: [
           {
@@ -346,7 +346,7 @@ export const getStoryData = (t: (key: string) => string): Record<string, Story> 
       {
         title: t("story.photographer.scene1.title"),
         description: t("story.photographer.scene1.description"),
-        image: "/placeholder.svg?height=600&width=800",
+        image: "/photographer-character-with-camera.jpg",
         educationalInfo: t("story.photographer.scene1.educationalInfo"),
         choices: [
           {
@@ -366,7 +366,7 @@ export const getStoryData = (t: (key: string) => string): Record<string, Story> 
       {
         title: t("story.photographer.scene2.title"),
         description: t("story.photographer.scene2.description"),
-        image: "/placeholder.svg?height=600&width=800",
+        image: "/photographer-character-with-camera-and-tripod-unde.jpg",
         educationalInfo: t("story.photographer.scene2.educationalInfo"),
         choices: [
           {
@@ -386,7 +386,7 @@ export const getStoryData = (t: (key: string) => string): Record<string, Story> 
       {
         title: t("story.photographer.scene3.title"),
         description: t("story.photographer.scene3.description"),
-        image: "/placeholder.svg?height=600&width=800",
+        image: "/beautiful-green-and-pink-aurora-borealis-dancing-o.jpg",
         educationalInfo: t("story.photographer.scene3.educationalInfo"),
         choices: [
           {
@@ -417,7 +417,7 @@ export const getStoryData = (t: (key: string) => string): Record<string, Story> 
       {
         title: t("story.solar-storm.scene1.title"),
         description: t("story.solar-storm.scene1.description"),
-        image: "/placeholder.svg?height=600&width=800",
+        image: "/massive-solar-flare-erupting-from-sun-surface-with.jpg",
         educationalInfo: t("story.solar-storm.scene1.educationalInfo"),
         choices: [
           {
@@ -437,7 +437,7 @@ export const getStoryData = (t: (key: string) => string): Record<string, Story> 
       {
         title: t("story.solar-storm.scene2.title"),
         description: t("story.solar-storm.scene2.description"),
-        image: "/placeholder.svg?height=600&width=800",
+        image: "/coronal-mass-ejection-erupting-from-sun-toward-ear.jpg",
         educationalInfo: t("story.solar-storm.scene2.educationalInfo"),
         choices: [
           {
@@ -457,7 +457,7 @@ export const getStoryData = (t: (key: string) => string): Record<string, Story> 
       {
         title: t("story.solar-storm.scene3.title"),
         description: t("story.solar-storm.scene3.description"),
-        image: "/placeholder.svg?height=600&width=800",
+        image: "/glowing-solar-storm-energy-burst-with-bright-orang.jpg",
         educationalInfo: t("story.solar-storm.scene3.educationalInfo"),
         choices: [
           {

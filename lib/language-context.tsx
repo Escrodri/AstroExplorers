@@ -59,6 +59,42 @@ const translations = {
     "facts.cta": "¿Quieres aprender más sobre el clima espacial?",
     "facts.cta.learn": "Explorar Temas",
     "facts.cta.adventure": "Comenzar Aventura",
+    
+    // Facts Categories
+    "facts.categories.solarFlares": "Erupciones Solares",
+    "facts.categories.theSun": "El Sol",
+    "facts.categories.auroras": "Auroras",
+    "facts.categories.speed": "Velocidad",
+    "facts.categories.history": "Historia",
+    "facts.categories.protection": "Protección",
+    "facts.categories.cmes": "Eyecciones de Masa Coronal",
+    "facts.categories.technology": "Tecnología",
+    "facts.categories.spaceTravel": "Viajes Espaciales",
+    "facts.categories.solarCycle": "Ciclo Solar",
+    "facts.categories.animals": "Animales",
+    "facts.categories.prediction": "Predicción",
+    
+    // Facts Content
+    "facts.content.solarFlares1": "¡La erupción solar más grande jamás registrada ocurrió en 2003 y fue tan poderosa que sobrecargó los sensores que la medían!",
+    "facts.content.theSun1": "¡El Sol es tan grande que podrías meter más de 1 millón de Tierras dentro de él!",
+    "facts.content.auroras1": "¡Las auroras también ocurren en otros planetas! Júpiter y Saturno tienen auroras que son incluso más grandes y brillantes que las de la Tierra.",
+    "facts.content.speed1": "El viento solar viaja a aproximadamente 1 millón de millas por hora - ¡eso es lo suficientemente rápido para ir de la Tierra a la Luna en solo 15 minutos!",
+    "facts.content.history1": "En 1859, una tormenta solar masiva llamada el Evento Carrington hizo que los cables de telégrafo chispearan y se incendiaran. ¡Si ocurriera hoy, podría dañar satélites y redes eléctricas en todo el mundo!",
+    "facts.content.protection1": "El campo magnético de la Tierra nos protege de la mayor parte de la radiación solar. ¡Sin él, el viento solar arrancaría nuestra atmósfera como lo hizo en Marte!",
+    "facts.content.cmes1": "Una Eyección de Masa Coronal puede contener hasta 10 mil millones de toneladas de partículas - ¡eso es más pesado que 10,000 portaaviones!",
+    "facts.content.auroras2": "Los colores de las auroras dependen de qué partículas de gas son golpeadas: el oxígeno crea verde y rojo, mientras que el nitrógeno crea azul y púrpura.",
+    "facts.content.technology1": "Los satélites GPS pueden volverse menos precisos durante las tormentas solares porque la radiación afecta las señales de radio que viajan a través de la atmósfera.",
+    "facts.content.theSun2": "¡La temperatura de la superficie del Sol es de aproximadamente 10,000°F, pero su atmósfera exterior (corona) es misteriosamente mucho más caliente a más de 2 millones°F!",
+    "facts.content.history2": "En 1989, una tormenta geomagnética causó un apagón de 9 horas en Quebec, Canadá, afectando a 6 millones de personas. ¡La misma tormenta hizo que las auroras fueran visibles tan al sur como Texas!",
+    "facts.content.spaceTravel1": "¡Los astronautas en la Estación Espacial Internacional pueden recibir tanta radiación en un día durante una tormenta solar como la que obtendrías de 100 radiografías de pecho!",
+    "facts.content.solarCycle1": "El Sol pasa por un ciclo de actividad de 11 años. Durante el máximo solar, hay muchas más erupciones solares y CMEs que durante el mínimo solar.",
+    "facts.content.auroras3": "Los mejores lugares para ver auroras están cerca de los círculos ártico y antártico, en lugares como Alaska, Canadá, Islandia, Noruega y la Antártida.",
+    "facts.content.speed2": "La luz de una erupción solar llega a la Tierra en solo 8 minutos, pero las partículas de una CME tardan 1-3 días en llegar.",
+    "facts.content.animals1": "Algunos científicos piensan que las ballenas, tortugas marinas y aves usan el campo magnético de la Tierra para navegar. ¡Las tormentas solares podrían confundirlos!",
+    "facts.content.technology2": "Las aerolíneas a veces tienen que redirigir vuelos durante las tormentas solares para evitar la exposición a la radiación y problemas de comunicación a gran altitud.",
+    "facts.content.theSun3": "¡El Sol convierte 4 millones de toneladas de materia en energía cada segundo a través de la fusión nuclear!",
+    "facts.content.auroras4": "¡Las auroras hacen sonidos! Algunas personas reportan escuchar ruidos de crujidos o silbidos durante exhibiciones de auroras muy fuertes.",
+    "facts.content.prediction1": "¡Los científicos usan satélites especiales posicionados entre la Tierra y el Sol para darnos aproximadamente 15-60 minutos de advertencia antes de que una tormenta solar golpee!",
 
     // Characters Page
     "characters.back": "Volver al Inicio",
@@ -326,6 +362,122 @@ const translations = {
     "story.solar-storm.learning3": "El campo magnético nos cuida",
     "story.solar-storm.learning4": "El clima espacial trae retos y auroras",
     "story.solar-storm.learning5": "Los científicos lo estudian para cuidarnos",
+
+    // Learn Page
+    "learn.back": "Volver al Inicio",
+    "learn.title": "Aprende Sobre el Clima Espacial",
+    "learn.subtitle": "¡Descubre la ciencia increíble detrás de las tormentas solares, auroras y cómo el Sol afecta a la Tierra!",
+    "learn.cta": "¿Listo para experimentar el clima espacial tú mismo?",
+    "learn.cta.start": "Comienza Tu Aventura",
+
+    // Educational Topics
+    "learn.what-is.title": "¿Qué es el Clima Espacial?",
+    "learn.what-is.description": "El clima espacial es lo que sucede en el espacio que puede afectar a la Tierra y nuestra tecnología. ¡Así como la Tierra tiene clima con lluvia, viento y tormentas, el espacio tiene su propio tipo de clima!",
+    "learn.what-is.fact1": "El clima espacial proviene del Sol, que es una bola gigante de gas caliente",
+    "learn.what-is.fact2": "El Sol envía constantemente energía y partículas llamadas viento solar",
+    "learn.what-is.fact3": "A veces el Sol tiene grandes explosiones llamadas erupciones solares",
+    "learn.what-is.fact4": "Estas explosiones pueden enviar enormes nubes de partículas hacia la Tierra",
+    "learn.what-is.fact5": "¡El clima espacial puede afectar satélites, redes eléctricas e incluso auroras!",
+    "learn.what-is.funFact": "¡El Sol es tan grande que podrías meter más de 1 millón de Tierras dentro de él! Y está a 93 millones de millas de distancia de nosotros.",
+
+    "learn.solar-flares.title": "Erupciones Solares",
+    "learn.solar-flares.description": "Las erupciones solares son como explosiones gigantes en la superficie del Sol. ¡Liberan tanta energía como miles de millones de bombas nucleares en solo unos minutos!",
+    "learn.solar-flares.fact1": "Las erupciones solares ocurren cuando la energía magnética se acumula y se libera repentinamente",
+    "learn.solar-flares.fact2": "Envían luz, rayos X y otros tipos de radiación",
+    "learn.solar-flares.fact3": "La luz de una erupción solar llega a la Tierra en solo 8 minutos",
+    "learn.solar-flares.fact4": "Las erupciones solares se clasifican por tamaño: A, B, C, M y X (¡X es la más grande!)",
+    "learn.solar-flares.fact5": "Pueden interrumpir las comunicaciones por radio y dañar satélites",
+    "learn.solar-flares.funFact": "¡La erupción solar más grande jamás registrada ocurrió en 2003. Fue tan poderosa que sobrecargó los sensores que la medían!",
+
+    "learn.cme.title": "Eyecciones de Masa Coronal (CME)",
+    "learn.cme.description": "Una Eyección de Masa Coronal (CME) es como una burbuja gigante de partículas que el Sol expulsa al espacio. ¡Estas burbujas pueden ser más grandes que la Tierra!",
+    "learn.cme.fact1": "Las CME contienen miles de millones de toneladas de partículas del Sol",
+    "learn.cme.fact2": "Viajan a través del espacio a velocidades de 1-3 millones de millas por hora",
+    "learn.cme.fact3": "Tarda de 1 a 3 días para que una CME llegue a la Tierra",
+    "learn.cme.fact4": "Cuando una CME golpea el campo magnético de la Tierra, crea una tormenta geomagnética",
+    "learn.cme.fact5": "Las CME son la causa principal de los efectos fuertes del clima espacial en la Tierra",
+    "learn.cme.funFact": "¡Si pudieras ver una CME desde el espacio, parecería una nube gigante brillante alejándose del Sol!",
+
+    "learn.magnetosphere.title": "El Escudo Magnético de la Tierra",
+    "learn.magnetosphere.description": "La Tierra tiene un campo de fuerza invisible llamado magnetosfera que nos protege del clima espacial. ¡Es como un escudo de superhéroe alrededor de nuestro planeta!",
+    "learn.magnetosphere.fact1": "La magnetosfera es creada por el campo magnético de la Tierra",
+    "learn.magnetosphere.fact2": "Desvía la mayor parte del viento solar lejos de la Tierra",
+    "learn.magnetosphere.fact3": "Sin ella, la radiación solar eliminaría nuestra atmósfera",
+    "learn.magnetosphere.fact4": "Durante las tormentas solares, la magnetosfera se comprime y perturba",
+    "learn.magnetosphere.fact5": "La magnetosfera se extiende unas 40,000 millas en el espacio del lado soleado",
+    "learn.magnetosphere.funFact": "¡El campo magnético de la Tierra es creado por hierro líquido que gira en el núcleo del planeta, miles de millas bajo tus pies!",
+
+    "learn.auroras.title": "Auroras (Luces del Norte y del Sur)",
+    "learn.auroras.description": "Las auroras son hermosas luces coloridas que bailan en el cielo cerca de los Polos Norte y Sur. ¡Son creadas por el clima espacial!",
+    "learn.auroras.fact1": "Las auroras ocurren cuando las partículas solares golpean los gases en la atmósfera de la Tierra",
+    "learn.auroras.fact2": "Las auroras verdes son creadas por oxígeno a altitudes más bajas",
+    "learn.auroras.fact3": "Las auroras rojas son creadas por oxígeno a altitudes más altas",
+    "learn.auroras.fact4": "Las auroras azules y moradas son creadas por nitrógeno",
+    "learn.auroras.fact5": "Las mejores auroras ocurren durante tormentas geomagnéticas fuertes",
+    "learn.auroras.funFact": "¡Las auroras también ocurren en otros planetas! ¡Júpiter y Saturno tienen auroras que son incluso más grandes que las de la Tierra!",
+
+    "learn.impacts.title": "Cómo Nos Afecta el Clima Espacial",
+    "learn.impacts.description": "¡El clima espacial puede parecer lejano, pero en realidad puede afectar nuestra vida diaria aquí en la Tierra de maneras sorprendentes!",
+    "learn.impacts.fact1": "La navegación GPS puede volverse menos precisa durante las tormentas solares",
+    "learn.impacts.fact2": "Las comunicaciones por radio pueden interrumpirse, afectando a pilotos y servicios de emergencia",
+    "learn.impacts.fact3": "Las redes eléctricas pueden dañarse, causando potencialmente apagones",
+    "learn.impacts.fact4": "Los satélites pueden dañarse o cambiar sus órbitas",
+    "learn.impacts.fact5": "Los astronautas en el espacio necesitan protección extra contra la radiación",
+    "learn.impacts.fact6": "¡Incluso los oleoductos pueden verse afectados por corrientes eléctricas inducidas!",
+    "learn.impacts.funFact": "En 1989, una tormenta geomagnética causó un apagón de 9 horas en Quebec, Canadá, afectando a 6 millones de personas. ¡La misma tormenta hizo que las auroras fueran visibles hasta Texas!",
+
+    // Educational Content Labels
+    "learn.keyFacts": "Datos Clave:",
+    "learn.funFact": "¡Dato Curioso!",
+    "learn.seeAnother": "Ver otra",
+
+    // Resources Section
+    "resources.title": "Recursos Oficiales",
+    "resources.disclaimer": "Enlaces a sitios web oficiales de agencias espaciales y meteorológicas para información autorizada sobre clima espacial.",
+    "resources.open": "Abrir",
+    
+    // NASA Resources
+    "resources.nasa.title": "NASA",
+    "resources.nasa.spaceWeather.title": "Sitio Web de Clima Espacial de NASA",
+    "resources.nasa.spaceWeather.description": "Panorama general del clima espacial y el programa de NASA para apoyar a comunidades afectadas.",
+    "resources.nasa.solarStorms.title": "Tormentas Solares y Erupciones",
+    "resources.nasa.solarStorms.description": "Explicación de fenómenos: erupciones solares, eyecciones de masa coronal y ciclo solar.",
+    "resources.nasa.centers.title": "Centros de Excelencia en Clima Espacial",
+    "resources.nasa.centers.description": "Tres proyectos centrados en mitigar impactos del clima espacial en activos espaciales.",
+    "resources.nasa.fleet.title": "Flota Heliofísica de NASA",
+    "resources.nasa.fleet.description": "Visualización de la flota de misiones heliosféricas actuales de NASA.",
+    "resources.nasa.overview.title": "Clima Espacial de NASA (Visión general)",
+    "resources.nasa.overview.description": "Información de referencia sobre clima espacial en NASA Science (inglés).",
+    "resources.nasa.spacePlace.title": "NASA Space Place",
+    "resources.nasa.spacePlace.description": "Recursos educativos interactivos sobre el espacio y la ciencia para todas las edades.",
+    
+    // NOAA Resources
+    "resources.noaa.title": "NOAA",
+    "resources.noaa.swpc.title": "NOAA SWPC",
+    "resources.noaa.swpc.description": "Centro de Predicción del Clima Espacial: pronósticos y datos operativos.",
+    "resources.noaa.fiveThings.title": "Cinco Cosas: Clima Espacial",
+    "resources.noaa.fiveThings.description": "Cinco claves sobre el clima espacial y su observación.",
+    "resources.noaa.guide.title": "Guía ciclo solar y clima espacial (NESDIS)",
+    "resources.noaa.guide.description": "Introducción al ciclo solar y recursos educativos.",
+    
+    // CSA Resources
+    "resources.csa.title": "CSA (Canadá)",
+    "resources.csa.spaceWeather.title": "Clima Espacial Canadá",
+    "resources.csa.spaceWeather.description": "Condiciones actuales, datos y servicios; recursos para aprender más.",
+    "resources.csa.overview.title": "Clima Espacial sobre Canadá",
+    "resources.csa.overview.description": "Información sobre la importancia del pronóstico y su impacto en tecnología y vida diaria.",
+    
+    // AEB Resources
+    "resources.aeb.title": "AEB (Brasil)",
+    "resources.aeb.spaceWeather.title": "Clima Espacial AEB",
+    "resources.aeb.spaceWeather.description": "Recursos educativos sobre clima espacial en portugués.",
+    
+    // Other Resources
+    "resources.other.title": "Otros Recursos",
+    "resources.other.esa.title": "ESA Space Weather",
+    "resources.other.esa.description": "Información sobre clima espacial de la Agencia Espacial Europea.",
+    "resources.other.jaxa.title": "JAXA Space Weather",
+    "resources.other.jaxa.description": "Recursos sobre clima espacial de la Agencia Japonesa de Exploración Aeroespacial.",
   },
   en: {
     // Hero Section
@@ -364,6 +516,42 @@ const translations = {
     "facts.cta": "Want to learn more about space weather?",
     "facts.cta.learn": "Explore Topics",
     "facts.cta.adventure": "Start Adventure",
+    
+    // Facts Categories
+    "facts.categories.solarFlares": "Solar Flares",
+    "facts.categories.theSun": "The Sun",
+    "facts.categories.auroras": "Auroras",
+    "facts.categories.speed": "Speed",
+    "facts.categories.history": "History",
+    "facts.categories.protection": "Protection",
+    "facts.categories.cmes": "Coronal Mass Ejections",
+    "facts.categories.technology": "Technology",
+    "facts.categories.spaceTravel": "Space Travel",
+    "facts.categories.solarCycle": "Solar Cycle",
+    "facts.categories.animals": "Animals",
+    "facts.categories.prediction": "Prediction",
+    
+    // Facts Content
+    "facts.content.solarFlares1": "The biggest solar flare ever recorded happened in 2003 and was so powerful it overloaded the sensors measuring it!",
+    "facts.content.theSun1": "The Sun is so big that you could fit more than 1 million Earths inside it!",
+    "facts.content.auroras1": "Auroras also happen on other planets! Jupiter and Saturn have auroras that are even bigger and brighter than Earth's.",
+    "facts.content.speed1": "Solar wind travels at about 1 million miles per hour - that's fast enough to go from Earth to the Moon in just 15 minutes!",
+    "facts.content.history1": "In 1859, a massive solar storm called the Carrington Event made telegraph wires spark and catch fire. If it happened today, it could damage satellites and power grids worldwide!",
+    "facts.content.protection1": "Earth's magnetic field protects us from most solar radiation. Without it, solar wind would strip away our atmosphere like it did on Mars!",
+    "facts.content.cmes1": "A Coronal Mass Ejection can contain up to 10 billion tons of particles - that's heavier than 10,000 aircraft carriers!",
+    "facts.content.auroras2": "The colors of auroras depend on which gas particles are hit: oxygen creates green and red, while nitrogen creates blue and purple.",
+    "facts.content.technology1": "GPS satellites can become less accurate during solar storms because the radiation affects radio signals traveling through the atmosphere.",
+    "facts.content.theSun2": "The Sun's surface temperature is about 10,000°F, but its outer atmosphere (corona) is mysteriously much hotter at over 2 million°F!",
+    "facts.content.history2": "In 1989, a geomagnetic storm caused a 9-hour blackout in Quebec, Canada, affecting 6 million people. The same storm made auroras visible as far south as Texas!",
+    "facts.content.spaceTravel1": "Astronauts on the International Space Station can receive as much radiation in one day during a solar storm as you'd get from 100 chest X-rays!",
+    "facts.content.solarCycle1": "The Sun goes through an 11-year cycle of activity. During solar maximum, there are many more solar flares and CMEs than during solar minimum.",
+    "facts.content.auroras3": "The best places to see auroras are near the Arctic and Antarctic circles, in places like Alaska, Canada, Iceland, Norway, and Antarctica.",
+    "facts.content.speed2": "Light from a solar flare reaches Earth in just 8 minutes, but the particles from a CME take 1-3 days to arrive.",
+    "facts.content.animals1": "Some scientists think that whales, sea turtles, and birds use Earth's magnetic field to navigate. Solar storms might confuse them!",
+    "facts.content.technology2": "Airlines sometimes have to reroute flights during solar storms to avoid radiation exposure and communication problems at high altitudes.",
+    "facts.content.theSun3": "The Sun converts 4 million tons of matter into energy every second through nuclear fusion!",
+    "facts.content.auroras4": "Auroras make sounds! Some people report hearing crackling or whooshing noises during very strong aurora displays.",
+    "facts.content.prediction1": "Scientists use special satellites positioned between Earth and the Sun to give us about 15-60 minutes warning before a solar storm hits!",
 
     // Characters Page
     "characters.back": "Back to Home",
@@ -624,6 +812,122 @@ const translations = {
     "story.solar-storm.learning3": "The magnetic field protects us",
     "story.solar-storm.learning4": "Space weather brings challenges and auroras",
     "story.solar-storm.learning5": "Scientists study it to take care of us",
+
+    // Learn Page
+    "learn.back": "Back to Home",
+    "learn.title": "Learn About Space Weather",
+    "learn.subtitle": "Discover the incredible science behind solar storms, auroras, and how the Sun affects Earth!",
+    "learn.cta": "Ready to experience space weather yourself?",
+    "learn.cta.start": "Start Your Adventure",
+
+    // Educational Topics
+    "learn.what-is.title": "What is Space Weather?",
+    "learn.what-is.description": "Space weather is what happens in space that can affect Earth and our technology. Just like Earth has weather with rain, wind, and storms, space has its own kind of weather!",
+    "learn.what-is.fact1": "Space weather comes from the Sun, which is a giant ball of hot gas",
+    "learn.what-is.fact2": "The Sun constantly sends energy and particles called solar wind",
+    "learn.what-is.fact3": "Sometimes the Sun has big explosions called solar flares",
+    "learn.what-is.fact4": "These explosions can send huge clouds of particles toward Earth",
+    "learn.what-is.fact5": "Space weather can affect satellites, power grids, and even auroras!",
+    "learn.what-is.funFact": "The Sun is so big you could fit more than 1 million Earths inside it! And it's 93 million miles away from us.",
+
+    "learn.solar-flares.title": "Solar Flares",
+    "learn.solar-flares.description": "Solar flares are like giant explosions on the Sun's surface. They release as much energy as billions of nuclear bombs in just a few minutes!",
+    "learn.solar-flares.fact1": "Solar flares happen when magnetic energy builds up and releases suddenly",
+    "learn.solar-flares.fact2": "They send light, X-rays, and other types of radiation",
+    "learn.solar-flares.fact3": "Light from a solar flare reaches Earth in just 8 minutes",
+    "learn.solar-flares.fact4": "Solar flares are classified by size: A, B, C, M, and X (X is the biggest!)",
+    "learn.solar-flares.fact5": "They can disrupt radio communications and damage satellites",
+    "learn.solar-flares.funFact": "The largest solar flare ever recorded happened in 2003. It was so powerful it overloaded the sensors measuring it!",
+
+    "learn.cme.title": "Coronal Mass Ejections (CME)",
+    "learn.cme.description": "A Coronal Mass Ejection (CME) is like a giant bubble of particles that the Sun shoots into space. These bubbles can be bigger than Earth!",
+    "learn.cme.fact1": "CMEs contain billions of tons of particles from the Sun",
+    "learn.cme.fact2": "They travel through space at speeds of 1-3 million miles per hour",
+    "learn.cme.fact3": "It takes 1 to 3 days for a CME to reach Earth",
+    "learn.cme.fact4": "When a CME hits Earth's magnetic field, it creates a geomagnetic storm",
+    "learn.cme.fact5": "CMEs are the main cause of strong space weather effects on Earth",
+    "learn.cme.funFact": "If you could see a CME from space, it would look like a giant bright cloud moving away from the Sun!",
+
+    "learn.magnetosphere.title": "Earth's Magnetic Shield",
+    "learn.magnetosphere.description": "Earth has an invisible force field called the magnetosphere that protects us from space weather. It's like a superhero shield around our planet!",
+    "learn.magnetosphere.fact1": "The magnetosphere is created by Earth's magnetic field",
+    "learn.magnetosphere.fact2": "It deflects most of the solar wind away from Earth",
+    "learn.magnetosphere.fact3": "Without it, solar radiation would strip away our atmosphere",
+    "learn.magnetosphere.fact4": "During solar storms, the magnetosphere gets compressed and disturbed",
+    "learn.magnetosphere.fact5": "The magnetosphere extends about 40,000 miles into space on the sunward side",
+    "learn.magnetosphere.funFact": "Earth's magnetic field is created by liquid iron spinning in the planet's core, thousands of miles beneath your feet!",
+
+    "learn.auroras.title": "Auroras (Northern and Southern Lights)",
+    "learn.auroras.description": "Auroras are beautiful colorful lights that dance in the sky near the North and South Poles. They're created by space weather!",
+    "learn.auroras.fact1": "Auroras happen when solar particles hit gases in Earth's atmosphere",
+    "learn.auroras.fact2": "Green auroras are created by oxygen at lower altitudes",
+    "learn.auroras.fact3": "Red auroras are created by oxygen at higher altitudes",
+    "learn.auroras.fact4": "Blue and purple auroras are created by nitrogen",
+    "learn.auroras.fact5": "The best auroras happen during strong geomagnetic storms",
+    "learn.auroras.funFact": "Auroras also happen on other planets! Jupiter and Saturn have auroras that are even bigger than Earth's!",
+
+    "learn.impacts.title": "How Space Weather Affects Us",
+    "learn.impacts.description": "Space weather might seem far away, but it can actually affect our daily life here on Earth in surprising ways!",
+    "learn.impacts.fact1": "GPS navigation can become less accurate during solar storms",
+    "learn.impacts.fact2": "Radio communications can be disrupted, affecting pilots and emergency services",
+    "learn.impacts.fact3": "Power grids can be damaged, potentially causing blackouts",
+    "learn.impacts.fact4": "Satellites can be damaged or change their orbits",
+    "learn.impacts.fact5": "Astronauts in space need extra protection against radiation",
+    "learn.impacts.fact6": "Even oil pipelines can be affected by induced electrical currents!",
+    "learn.impacts.funFact": "In 1989, a geomagnetic storm caused a 9-hour blackout in Quebec, Canada, affecting 6 million people. The same storm made auroras visible as far south as Texas!",
+
+    // Educational Content Labels
+    "learn.keyFacts": "Key Facts:",
+    "learn.funFact": "Fun Fact!",
+    "learn.seeAnother": "See Another",
+
+    // Resources Section
+    "resources.title": "Official Resources",
+    "resources.disclaimer": "Links to official websites of space and meteorological agencies for authoritative information about space weather.",
+    "resources.open": "Open",
+    
+    // NASA Resources
+    "resources.nasa.title": "NASA",
+    "resources.nasa.spaceWeather.title": "NASA Space Weather Website",
+    "resources.nasa.spaceWeather.description": "Overview of space weather and NASA's program to support affected communities.",
+    "resources.nasa.solarStorms.title": "Solar Storms and Flares",
+    "resources.nasa.solarStorms.description": "Explanation of phenomena: solar flares, coronal mass ejections and solar cycle.",
+    "resources.nasa.centers.title": "Space Weather Centers of Excellence",
+    "resources.nasa.centers.description": "Three projects focused on mitigating space weather impacts on space assets.",
+    "resources.nasa.fleet.title": "NASA Heliophysics Fleet",
+    "resources.nasa.fleet.description": "Visualization of NASA's current heliospheric mission fleet.",
+    "resources.nasa.overview.title": "NASA Space Weather (Overview)",
+    "resources.nasa.overview.description": "Reference information about space weather at NASA Science (English).",
+    "resources.nasa.spacePlace.title": "NASA Space Place",
+    "resources.nasa.spacePlace.description": "Interactive educational resources about space and science for all ages.",
+    
+    // NOAA Resources
+    "resources.noaa.title": "NOAA",
+    "resources.noaa.swpc.title": "NOAA SWPC",
+    "resources.noaa.swpc.description": "Space Weather Prediction Center: forecasts and operational data.",
+    "resources.noaa.fiveThings.title": "Five Things: Space Weather",
+    "resources.noaa.fiveThings.description": "Five keys about space weather and its observation.",
+    "resources.noaa.guide.title": "Solar cycle and space weather guide (NESDIS)",
+    "resources.noaa.guide.description": "Introduction to the solar cycle and educational resources.",
+    
+    // CSA Resources
+    "resources.csa.title": "CSA (Canada)",
+    "resources.csa.spaceWeather.title": "Space Weather Canada",
+    "resources.csa.spaceWeather.description": "Current conditions, data and services; resources to learn more.",
+    "resources.csa.overview.title": "Space Weather over Canada",
+    "resources.csa.overview.description": "Information about the importance of forecasting and its impact on technology and daily life.",
+    
+    // AEB Resources
+    "resources.aeb.title": "AEB (Brazil)",
+    "resources.aeb.spaceWeather.title": "AEB Space Weather",
+    "resources.aeb.spaceWeather.description": "Educational resources about space weather in Portuguese.",
+    
+    // Other Resources
+    "resources.other.title": "Other Resources",
+    "resources.other.esa.title": "ESA Space Weather",
+    "resources.other.esa.description": "Space weather information from the European Space Agency.",
+    "resources.other.jaxa.title": "JAXA Space Weather",
+    "resources.other.jaxa.description": "Space weather resources from the Japan Aerospace Exploration Agency.",
   },
   pt: {
     // Hero Section
@@ -662,6 +966,42 @@ const translations = {
     "facts.cta": "Quer aprender mais sobre o clima espacial?",
     "facts.cta.learn": "Explorar Tópicos",
     "facts.cta.adventure": "Começar Aventura",
+    
+    // Facts Categories
+    "facts.categories.solarFlares": "Erupções Solares",
+    "facts.categories.theSun": "O Sol",
+    "facts.categories.auroras": "Auroras",
+    "facts.categories.speed": "Velocidade",
+    "facts.categories.history": "História",
+    "facts.categories.protection": "Proteção",
+    "facts.categories.cmes": "Ejeções de Massa Coronal",
+    "facts.categories.technology": "Tecnologia",
+    "facts.categories.spaceTravel": "Viagem Espacial",
+    "facts.categories.solarCycle": "Ciclo Solar",
+    "facts.categories.animals": "Animais",
+    "facts.categories.prediction": "Predição",
+    
+    // Facts Content
+    "facts.content.solarFlares1": "A maior erupção solar já registrada aconteceu em 2003 e foi tão poderosa que sobrecarregou os sensores que a mediam!",
+    "facts.content.theSun1": "O Sol é tão grande que você poderia colocar mais de 1 milhão de Terras dentro dele!",
+    "facts.content.auroras1": "As auroras também acontecem em outros planetas! Júpiter e Saturno têm auroras que são ainda maiores e mais brilhantes que as da Terra.",
+    "facts.content.speed1": "O vento solar viaja a cerca de 1 milhão de milhas por hora - isso é rápido o suficiente para ir da Terra à Lua em apenas 15 minutos!",
+    "facts.content.history1": "Em 1859, uma tempestade solar massiva chamada Evento Carrington fez fios de telégrafo faiscarem e pegarem fogo. Se acontecesse hoje, poderia danificar satélites e redes elétricas em todo o mundo!",
+    "facts.content.protection1": "O campo magnético da Terra nos protege da maior parte da radiação solar. Sem ele, o vento solar arrancaria nossa atmosfera como fez em Marte!",
+    "facts.content.cmes1": "Uma Ejeção de Massa Coronal pode conter até 10 bilhões de toneladas de partículas - isso é mais pesado que 10.000 porta-aviões!",
+    "facts.content.auroras2": "As cores das auroras dependem de quais partículas de gás são atingidas: o oxigênio cria verde e vermelho, enquanto o nitrogênio cria azul e roxo.",
+    "facts.content.technology1": "Satélites GPS podem se tornar menos precisos durante tempestades solares porque a radiação afeta sinais de rádio que viajam através da atmosfera.",
+    "facts.content.theSun2": "A temperatura da superfície do Sol é de cerca de 10.000°F, mas sua atmosfera externa (coroa) é misteriosamente muito mais quente a mais de 2 milhões°F!",
+    "facts.content.history2": "Em 1989, uma tempestade geomagnética causou um apagão de 9 horas em Quebec, Canadá, afetando 6 milhões de pessoas. A mesma tempestade fez auroras visíveis tão ao sul quanto o Texas!",
+    "facts.content.spaceTravel1": "Astronautas na Estação Espacial Internacional podem receber tanta radiação em um dia durante uma tempestade solar quanto você receberia de 100 radiografias de tórax!",
+    "facts.content.solarCycle1": "O Sol passa por um ciclo de atividade de 11 anos. Durante o máximo solar, há muito mais erupções solares e CMEs do que durante o mínimo solar.",
+    "facts.content.auroras3": "Os melhores lugares para ver auroras estão perto dos círculos ártico e antártico, em lugares como Alasca, Canadá, Islândia, Noruega e Antártida.",
+    "facts.content.speed2": "A luz de uma erupção solar chega à Terra em apenas 8 minutos, mas as partículas de uma CME levam 1-3 dias para chegar.",
+    "facts.content.animals1": "Alguns cientistas pensam que baleias, tartarugas marinhas e pássaros usam o campo magnético da Terra para navegar. Tempestades solares podem confundi-los!",
+    "facts.content.technology2": "Airlines às vezes têm que redirecionar voos durante tempestades solares para evitar exposição à radiação e problemas de comunicação em grandes altitudes.",
+    "facts.content.theSun3": "O Sol converte 4 milhões de toneladas de matéria em energia a cada segundo através da fusão nuclear!",
+    "facts.content.auroras4": "Auroras fazem sons! Algumas pessoas relatam ouvir ruídos de estalos ou sibilos durante exibições de auroras muito fortes.",
+    "facts.content.prediction1": "Cientistas usam satélites especiais posicionados entre a Terra e o Sol para nos dar cerca de 15-60 minutos de aviso antes de uma tempestade solar atingir!",
 
     // Characters Page
     "characters.back": "Voltar ao Início",
@@ -922,6 +1262,122 @@ const translations = {
     "story.solar-storm.learning3": "O campo magnético nos protege",
     "story.solar-storm.learning4": "O clima espacial traz desafios e auroras",
     "story.solar-storm.learning5": "Cientistas o estudam para nos cuidar",
+
+    // Learn Page
+    "learn.back": "Voltar ao Início",
+    "learn.title": "Aprenda sobre o Clima Espacial",
+    "learn.subtitle": "Descubra a ciência incrível por trás das tempestades solares, auroras e como o Sol afeta a Terra!",
+    "learn.cta": "Pronto para experimentar o clima espacial você mesmo?",
+    "learn.cta.start": "Comece sua Aventura",
+
+    // Educational Topics
+    "learn.what-is.title": "O que é Clima Espacial?",
+    "learn.what-is.description": "O clima espacial é o que acontece no espaço que pode afetar a Terra e nossa tecnologia. Assim como a Terra tem clima com chuva, vento e tempestades, o espaço tem seu próprio tipo de clima!",
+    "learn.what-is.fact1": "O clima espacial vem do Sol, que é uma bola gigante de gás quente",
+    "learn.what-is.fact2": "O Sol constantemente envia energia e partículas chamadas vento solar",
+    "learn.what-is.fact3": "Às vezes o Sol tem grandes explosões chamadas erupções solares",
+    "learn.what-is.fact4": "Essas explosões podem enviar enormes nuvens de partículas em direção à Terra",
+    "learn.what-is.fact5": "O clima espacial pode afetar satélites, redes elétricas e até auroras!",
+    "learn.what-is.funFact": "O Sol é tão grande que você poderia colocar mais de 1 milhão de Terras dentro dele! E está a 93 milhões de milhas de distância de nós.",
+
+    "learn.solar-flares.title": "Erupções Solares",
+    "learn.solar-flares.description": "Erupções solares são como explosões gigantes na superfície do Sol. Elas liberam tanta energia quanto bilhões de bombas nucleares em apenas alguns minutos!",
+    "learn.solar-flares.fact1": "Erupções solares acontecem quando a energia magnética se acumula e se libera repentinamente",
+    "learn.solar-flares.fact2": "Elas enviam luz, raios X e outros tipos de radiação",
+    "learn.solar-flares.fact3": "A luz de uma erupção solar chega à Terra em apenas 8 minutos",
+    "learn.solar-flares.fact4": "Erupções solares são classificadas por tamanho: A, B, C, M e X (X é a maior!)",
+    "learn.solar-flares.fact5": "Elas podem interromper comunicações de rádio e danificar satélites",
+    "learn.solar-flares.funFact": "A maior erupção solar já registrada aconteceu em 2003. Foi tão poderosa que sobrecarregou os sensores que a mediam!",
+
+    "learn.cme.title": "Ejeções de Massa Coronal (CME)",
+    "learn.cme.description": "Uma Ejeção de Massa Coronal (CME) é como uma bolha gigante de partículas que o Sol dispara no espaço. Essas bolhas podem ser maiores que a Terra!",
+    "learn.cme.fact1": "CMEs contêm bilhões de toneladas de partículas do Sol",
+    "learn.cme.fact2": "Elas viajam pelo espaço a velocidades de 1-3 milhões de milhas por hora",
+    "learn.cme.fact3": "Leva de 1 a 3 dias para uma CME chegar à Terra",
+    "learn.cme.fact4": "Quando uma CME atinge o campo magnético da Terra, cria uma tempestade geomagnética",
+    "learn.cme.fact5": "CMEs são a principal causa dos efeitos fortes do clima espacial na Terra",
+    "learn.cme.funFact": "Se você pudesse ver uma CME do espaço, pareceria uma nuvem gigante brilhante se afastando do Sol!",
+
+    "learn.magnetosphere.title": "O Escudo Magnético da Terra",
+    "learn.magnetosphere.description": "A Terra tem um campo de força invisível chamado magnetosfera que nos protege do clima espacial. É como um escudo de super-herói ao redor do nosso planeta!",
+    "learn.magnetosphere.fact1": "A magnetosfera é criada pelo campo magnético da Terra",
+    "learn.magnetosphere.fact2": "Ela desvia a maior parte do vento solar para longe da Terra",
+    "learn.magnetosphere.fact3": "Sem ela, a radiação solar eliminaria nossa atmosfera",
+    "learn.magnetosphere.fact4": "Durante tempestades solares, a magnetosfera fica comprimida e perturbada",
+    "learn.magnetosphere.fact5": "A magnetosfera se estende cerca de 40.000 milhas no espaço do lado ensolarado",
+    "learn.magnetosphere.funFact": "O campo magnético da Terra é criado por ferro líquido girando no núcleo do planeta, milhares de milhas sob seus pés!",
+
+    "learn.auroras.title": "Auroras (Luzes do Norte e do Sul)",
+    "learn.auroras.description": "Auroras são belas luzes coloridas que dançam no céu perto dos Polos Norte e Sul. Elas são criadas pelo clima espacial!",
+    "learn.auroras.fact1": "Auroras acontecem quando partículas solares atingem gases na atmosfera da Terra",
+    "learn.auroras.fact2": "Auroras verdes são criadas por oxigênio em altitudes mais baixas",
+    "learn.auroras.fact3": "Auroras vermelhas são criadas por oxigênio em altitudes mais altas",
+    "learn.auroras.fact4": "Auroras azuis e roxas são criadas por nitrogênio",
+    "learn.auroras.fact5": "As melhores auroras acontecem durante tempestades geomagnéticas fortes",
+    "learn.auroras.funFact": "Auroras também acontecem em outros planetas! Júpiter e Saturno têm auroras que são ainda maiores que as da Terra!",
+
+    "learn.impacts.title": "Como o Clima Espacial nos Afeta",
+    "learn.impacts.description": "O clima espacial pode parecer distante, mas na verdade pode afetar nossa vida diária aqui na Terra de maneiras surpreendentes!",
+    "learn.impacts.fact1": "A navegação GPS pode se tornar menos precisa durante tempestades solares",
+    "learn.impacts.fact2": "Comunicações de rádio podem ser interrompidas, afetando pilotos e serviços de emergência",
+    "learn.impacts.fact3": "Redes elétricas podem ser danificadas, potencialmente causando apagões",
+    "learn.impacts.fact4": "Satélites podem ser danificados ou mudar suas órbitas",
+    "learn.impacts.fact5": "Astronautas no espaço precisam de proteção extra contra radiação",
+    "learn.impacts.fact6": "Até oleodutos podem ser afetados por correntes elétricas induzidas!",
+    "learn.impacts.funFact": "Em 1989, uma tempestade geomagnética causou um apagão de 9 horas em Quebec, Canadá, afetando 6 milhões de pessoas. A mesma tempestade fez auroras visíveis até o Texas!",
+
+    // Educational Content Labels
+    "learn.keyFacts": "Fatos Chave:",
+    "learn.funFact": "Fato Curioso!",
+    "learn.seeAnother": "Ver Outra",
+
+    // Resources Section
+    "resources.title": "Recursos Oficiais",
+    "resources.disclaimer": "Links para sites oficiais de agências espaciais e meteorológicas para informações autorizadas sobre clima espacial.",
+    "resources.open": "Abrir",
+    
+    // NASA Resources
+    "resources.nasa.title": "NASA",
+    "resources.nasa.spaceWeather.title": "Site de Clima Espacial da NASA",
+    "resources.nasa.spaceWeather.description": "Visão geral do clima espacial e programa da NASA para apoiar comunidades afetadas.",
+    "resources.nasa.solarStorms.title": "Tempestades Solares e Erupções",
+    "resources.nasa.solarStorms.description": "Explicação de fenômenos: erupções solares, ejeções de massa coronal e ciclo solar.",
+    "resources.nasa.centers.title": "Centros de Excelência em Clima Espacial",
+    "resources.nasa.centers.description": "Três projetos focados em mitigar impactos do clima espacial em ativos espaciais.",
+    "resources.nasa.fleet.title": "Frota Heliofísica da NASA",
+    "resources.nasa.fleet.description": "Visualização da frota atual de missões heliofísicas da NASA.",
+    "resources.nasa.overview.title": "Clima Espacial da NASA (Visão geral)",
+    "resources.nasa.overview.description": "Informações de referência sobre clima espacial na NASA Science (inglês).",
+    "resources.nasa.spacePlace.title": "NASA Space Place",
+    "resources.nasa.spacePlace.description": "Recursos educacionais interativos sobre espaço e ciência para todas as idades.",
+    
+    // NOAA Resources
+    "resources.noaa.title": "NOAA",
+    "resources.noaa.swpc.title": "NOAA SWPC",
+    "resources.noaa.swpc.description": "Centro de Previsão do Clima Espacial: previsões e dados operacionais.",
+    "resources.noaa.fiveThings.title": "Cinco Coisas: Clima Espacial",
+    "resources.noaa.fiveThings.description": "Cinco chaves sobre o clima espacial e sua observação.",
+    "resources.noaa.guide.title": "Guia do ciclo solar e clima espacial (NESDIS)",
+    "resources.noaa.guide.description": "Introdução ao ciclo solar e recursos educacionais.",
+    
+    // CSA Resources
+    "resources.csa.title": "CSA (Canadá)",
+    "resources.csa.spaceWeather.title": "Clima Espacial Canadá",
+    "resources.csa.spaceWeather.description": "Condições atuais, dados e serviços; recursos para aprender mais.",
+    "resources.csa.overview.title": "Clima Espacial sobre o Canadá",
+    "resources.csa.overview.description": "Informações sobre a importância da previsão e seu impacto na tecnologia e vida diária.",
+    
+    // AEB Resources
+    "resources.aeb.title": "AEB (Brasil)",
+    "resources.aeb.spaceWeather.title": "Clima Espacial AEB",
+    "resources.aeb.spaceWeather.description": "Recursos educacionais sobre clima espacial em português.",
+    
+    // Other Resources
+    "resources.other.title": "Outros Recursos",
+    "resources.other.esa.title": "ESA Clima Espacial",
+    "resources.other.esa.description": "Informações sobre clima espacial da Agência Espacial Europeia.",
+    "resources.other.jaxa.title": "JAXA Clima Espacial",
+    "resources.other.jaxa.description": "Recursos sobre clima espacial da Agência Japonesa de Exploração Aeroespacial.",
   },
 }
 
