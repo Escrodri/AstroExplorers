@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -135,8 +135,7 @@ export function SpaceWeatherFacts() {
   }
 
   // Evitar desajuste SSR/CSR: inicializar aleatorio solo en cliente después de montar
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  require("react").useEffect(() => {
+  useEffect(() => {
     const randomIndex = Math.floor(Math.random() * facts.length)
     setCurrentIndex(randomIndex)
     setShownFacts([randomIndex])

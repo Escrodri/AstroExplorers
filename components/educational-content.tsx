@@ -90,7 +90,11 @@ export function EducationalContent() {
   // Función para pre-cargar imágenes (memoizada)
   const preloadImage = useCallback((src: string): Promise<void> => {
     return new Promise((resolve, reject) => {
-      const img = new (window as any).Image()
+      if (typeof window === 'undefined') {
+        resolve()
+        return
+      }
+      const img = document.createElement('img')
       img.onload = () => resolve()
       img.onerror = reject
       img.src = src
