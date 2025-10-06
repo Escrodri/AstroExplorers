@@ -196,7 +196,7 @@ export function EducationalContent() {
     loadContent()
     
     return () => controller.abort()
-  }, [selectedTopic, language])
+  }, [selectedTopic, language, preloadImage, topicQuery])
 
   // Efecto para manejar el cambio de índice de imagen
   useEffect(() => {
@@ -232,7 +232,7 @@ export function EducationalContent() {
           })
       }
     }
-  }, [nasaIndex, nasaImages, preloadImage])
+  }, [nasaIndex, nasaImages, preloadImage, preloadedImages])
 
   // Mostrar skeleton mientras carga
   if (isLoading) {
