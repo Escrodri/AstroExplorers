@@ -11,10 +11,18 @@ interface NasaImageItem {
   href: string
 }
 
+interface NasaDataItem {
+  title?: string
+  description?: string
+  date_created?: string
+  keywords?: string[]
+}
+
 interface NasaResponse {
   collection: {
     items: Array<{
       links?: NasaImageItem[]
+      data?: NasaDataItem[]
     }>
   }
 }
