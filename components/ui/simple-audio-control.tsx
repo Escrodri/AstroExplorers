@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Play, Square } from 'lucide-react'
 import { useTextToSpeech } from '@/lib/hooks/useTextToSpeech'
+import { useLanguage } from '@/lib/language-context'
 
 interface SimpleAudioControlProps {
   text: string
@@ -17,6 +18,7 @@ export function SimpleAudioControl({
   size = 'sm'
 }: SimpleAudioControlProps) {
   const [isHydrated, setIsHydrated] = useState(false)
+  const { language } = useLanguage()
   
   const {
     isPlaying,
@@ -42,8 +44,9 @@ export function SimpleAudioControl({
       // Si está reproduciendo, parar
       stop()
     } else {
-      // Si no está reproduciendo, empezar
-      speak(text)
+      // Si no está reproduciendo, empezar con la voz correcta para el idioma
+      const langCode = language === 'es' ? 'es-ES' : language === 'en' ? 'en-US' : 'pt-BR'
+      speak(text, { lang: langCode, autoSelectVoice: true })
     }
   }
 

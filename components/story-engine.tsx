@@ -12,7 +12,7 @@ import { getStoryData } from "@/lib/story-data"
 import { useLanguage } from "@/lib/language-context"
 import { STORY_CONFIG } from "@/lib/constants"
 import { interpolate } from "@/lib/i18n-utils"
-import { AudioControls } from "@/components/ui/audio-controls"
+import { SimpleAudioControl } from "@/components/ui/simple-audio-control"
 
 interface StoryEngineProps {
   characterId: string
@@ -192,10 +192,9 @@ export function StoryEngine({ characterId }: StoryEngineProps) {
           <div className="prose prose-lg max-w-none mb-6">
             <div className="flex items-start gap-3">
               <p className="text-lg text-space-light dark:text-gray-200 leading-relaxed flex-1">{scene.description}</p>
-              <AudioControls 
+              <SimpleAudioControl 
                 text={scene.description}
                 size="md"
-                showSettings={true}
                 className="flex-shrink-0 mt-1"
               />
             </div>
@@ -210,7 +209,7 @@ export function StoryEngine({ characterId }: StoryEngineProps) {
                   <p className="font-bold text-space-deep dark:text-white mb-1">{t("story.didYouKnow")}</p>
                   <div className="flex items-start gap-3">
                     <p className="text-space-light dark:text-gray-200 flex-1">{scene.educationalInfo}</p>
-                    <AudioControls 
+                    <SimpleAudioControl 
                       text={scene.educationalInfo}
                       size="sm"
                       className="flex-shrink-0 mt-1"
@@ -238,7 +237,7 @@ export function StoryEngine({ characterId }: StoryEngineProps) {
                 <div className="flex-1">
                   <div className="flex items-start gap-3 mb-2">
                     <p className="text-lg font-bold text-space-deep dark:text-white flex-1">{choice.text}</p>
-                    <AudioControls 
+                    <SimpleAudioControl 
                       text={choice.text}
                       size="sm"
                       className="flex-shrink-0 mt-1"
@@ -247,7 +246,7 @@ export function StoryEngine({ characterId }: StoryEngineProps) {
                   {choice.hint && (
                     <div className="flex items-start gap-3">
                       <p className="text-sm text-space-light dark:text-gray-300 flex-1">{choice.hint}</p>
-                      <AudioControls 
+                      <SimpleAudioControl 
                         text={choice.hint}
                         size="sm"
                         className="flex-shrink-0 mt-0.5"

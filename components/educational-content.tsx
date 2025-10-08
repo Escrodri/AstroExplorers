@@ -64,6 +64,15 @@ const topics = [
   },
 ]
 
+const topicQuery: Record<string, string> = {
+  "what-is": "space weather",
+  "solar-flares": "solar flares",
+  "cme": "coronal mass ejection",
+  "magnetosphere": "earth magnetosphere",
+  "auroras": "aurora borealis aurora australis",
+  "impacts": "space weather impacts technology",
+}
+
 export function EducationalContent() {
   const { language, t } = useLanguage()
   const [selectedTopic, setSelectedTopic] = useState(topics[0].id)
@@ -78,14 +87,6 @@ export function EducationalContent() {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isImageLoading, setIsImageLoading] = useState<boolean>(true)
   const loadingImageRef = useRef<string | null>(null)
-  const topicQuery: Record<string, string> = {
-    "what-is": "space weather",
-    "solar-flares": "solar flares",
-    "cme": "coronal mass ejection",
-    "magnetosphere": "earth magnetosphere",
-    "auroras": "aurora borealis aurora australis",
-    "impacts": "space weather impacts technology",
-  }
 
   // Función para pre-cargar imágenes (memoizada)
   const preloadImage = useCallback((src: string): Promise<void> => {
@@ -196,7 +197,7 @@ export function EducationalContent() {
     loadContent()
     
     return () => controller.abort()
-  }, [selectedTopic, language, preloadImage, topicQuery])
+  }, [selectedTopic, language, preloadImage])
 
   // Efecto para manejar el cambio de índice de imagen
   useEffect(() => {

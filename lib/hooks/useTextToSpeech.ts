@@ -8,6 +8,7 @@ interface UseTextToSpeechOptions {
   volume?: number
   voice?: SpeechSynthesisVoice | null
   lang?: string
+  autoSelectVoice?: boolean
 }
 
 interface UseTextToSpeechReturn {
@@ -49,15 +50,16 @@ export function useTextToSpeech(): UseTextToSpeechReturn {
         voice.lang.startsWith('pt')
       )
       
-      if (preferredVoices.length > 0 && !currentVoice) {
-        setCurrentVoice(preferredVoices[0])
+      // Solo establecer voz por defecto si no hay una seleccionada
+      if (preferredVoices.length > 0) {
+        setCurrentVoice(prev => prev || preferredVoices[0])
       }
     }
-  }, [isSupported, currentVoice])
+  }, [isSupported])
 
   // Cargar voces cuando estén disponibles
   useEffect(() => {
-    if (!isSupported || voicesLoadedRef.current) return
+    if (!isSupported) return
 
     // Cargar voces inicialmente
     loadVoices()
@@ -67,11 +69,30 @@ export function useTextToSpeech(): UseTextToSpeechReturn {
       loadVoices()
     }
     
-    speechSynthesis.addEventListener('voiceschanged', handleVoicesChanged)
+    if (speechSynthesis) {
+      speechSynthesis.addEventListener('voiceschanged', handleVoicesChanged)
+    }
     
-    // Cleanup
+    // Intentar cargar voces después de un breve retraso si aún no se han cargado
+    const retryTimer = setTimeout(() => {
+      if (!voicesLoadedRef.current) {
+        loadVoices()
+      }
+    }, 500)
+    
+    // Cleanup: detener audio cuando el componente se desmonta
     return () => {
-      speechSynthesis.removeEventListener('voiceschanged', handleVoicesChanged)
+      if (speechSynthesis) {
+        speechSynthesis.removeEventListener('voiceschanged', handleVoicesChanged)
+        // Detener cualquier audio que esté reproduciéndose
+        if (speechSynthesis.speaking || speechSynthesis.paused) {
+          speechSynthesis.cancel()
+        }
+      }
+      clearTimeout(retryTimer)
+      setIsPlaying(false)
+      setIsPaused(false)
+      utteranceRef.current = null
     }
   }, [isSupported, loadVoices])
 
@@ -80,8 +101,16 @@ export function useTextToSpeech(): UseTextToSpeechReturn {
     utterance.rate = options.rate ?? 0.9
     utterance.pitch = options.pitch ?? 1
     utterance.volume = options.volume ?? 0.8
-    utterance.voice = options.voice ?? currentVoice
-    utterance.lang = options.lang ?? currentVoice?.lang ?? 'es-ES'
+    
+    // Si autoSelectVoice está activado y se especifica un idioma, buscar una voz apropiada
+    if (options.autoSelectVoice && options.lang) {
+      const langVoices = voices.filter(v => v.lang.startsWith(options.lang!.split('-')[0]))
+      utterance.voice = langVoices.length > 0 ? langVoices[0] : (options.voice ?? currentVoice)
+    } else {
+      utterance.voice = options.voice ?? currentVoice
+    }
+    
+    utterance.lang = options.lang ?? utterance.voice?.lang ?? currentVoice?.lang ?? 'es-ES'
 
     // Eventos
     utterance.onstart = () => {
@@ -115,10 +144,16 @@ export function useTextToSpeech(): UseTextToSpeechReturn {
 
     utteranceRef.current = utterance
     speechSynthesis.speak(utterance)
-  }, [currentVoice])
+  }, [currentVoice, voices])
 
   const speak = useCallback((text: string, options: UseTextToSpeechOptions = {}) => {
     if (!isSupported || !text.trim()) return
+
+    // Asegurarse de que las voces estén cargadas
+    if (!voicesLoadedRef.current) {
+      loadVoices()
+      return
+    }
 
     // Limpiar estado previo
     setIsPlaying(false)
@@ -136,7 +171,7 @@ export function useTextToSpeech(): UseTextToSpeechReturn {
       const utterance = new SpeechSynthesisUtterance(text)
       configureUtterance(utterance, text, options)
     }
-  }, [isSupported, configureUtterance])
+  }, [isSupported, configureUtterance, loadVoices])
 
   const pause = useCallback(() => {
     if (isSupported && speechSynthesis.speaking && !speechSynthesis.paused) {

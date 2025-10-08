@@ -14,6 +14,7 @@ import {
   ChevronUp
 } from 'lucide-react'
 import { useTextToSpeech } from '@/lib/hooks/useTextToSpeech'
+import { useLanguage } from '@/lib/language-context'
 
 interface AudioControlsProps {
   text: string
@@ -28,6 +29,7 @@ export function AudioControls({
   showSettings = false,
   size = 'md'
 }: AudioControlsProps) {
+  const { language } = useLanguage()
   const [showAdvancedSettings, setShowAdvancedSettings] = useState(false)
   const [rate, setRate] = useState(0.9)
   const [pitch, setPitch] = useState(1)
@@ -84,6 +86,8 @@ export function AudioControls({
 
   const handlePlayPause = (e: React.MouseEvent) => {
     e.stopPropagation()
+    const langCode = language === 'es' ? 'es-ES' : language === 'en' ? 'en-US' : 'pt-BR'
+    
     if (isPlaying && !isPaused) {
       pause()
     } else if (isPaused) {
@@ -93,7 +97,9 @@ export function AudioControls({
         rate: isMuted ? 0 : rate,
         pitch,
         volume: isMuted ? 0 : volume,
-        voice: currentVoice
+        voice: currentVoice,
+        lang: langCode,
+        autoSelectVoice: true
       })
     }
   }
@@ -105,10 +111,12 @@ export function AudioControls({
 
   const handleMuteToggle = (e: React.MouseEvent) => {
     e.stopPropagation()
+    const langCode = language === 'es' ? 'es-ES' : language === 'en' ? 'en-US' : 'pt-BR'
+    
     if (isMuted) {
       setIsMuted(false)
       if (isPlaying) {
-        speak(text, { rate, pitch, volume, voice: currentVoice })
+        speak(text, { rate, pitch, volume, voice: currentVoice, lang: langCode, autoSelectVoice: true })
       }
     } else {
       setIsMuted(true)
@@ -119,13 +127,42 @@ export function AudioControls({
   }
 
   return (
-    <div className={`flex items-center justify-end ${className}`}>
-      {/* Solo el botón de volumen */}
+    <div className={`flex items-center gap-2 ${className}`}>
+      {/* Botón Play/Pause */}
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={handlePlayPause}
+        className={`${sizeClasses[size]} hover:bg-primary/10 flex-shrink-0`}
+        title={isPlaying && !isPaused ? "Pausar" : "Reproducir"}
+      >
+        {isPlaying && !isPaused ? (
+          <Pause size={iconSizes[size]} />
+        ) : (
+          <Play size={iconSizes[size]} />
+        )}
+      </Button>
+
+      {/* Botón Stop (solo si está reproduciendo) */}
+      {isPlaying && (
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={handleStop}
+          className={`${sizeClasses[size]} hover:bg-accent-coral/10 flex-shrink-0`}
+          title="Detener"
+        >
+          <Square size={iconSizes[size]} />
+        </Button>
+      )}
+
+      {/* Botón de volumen */}
       <Button
         variant="outline"
         size="icon"
         onClick={handleMuteToggle}
         className={`${sizeClasses[size]} hover:bg-accent/10 flex-shrink-0`}
+        title={isMuted ? "Activar sonido" : "Silenciar"}
       >
         {isMuted ? (
           <VolumeX size={iconSizes[size]} />
